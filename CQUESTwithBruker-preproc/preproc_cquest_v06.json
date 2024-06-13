@@ -1,8 +1,8 @@
-{"name":"CQUESTwithBruker-preproc", "tool-version":"0.5", 
+{"name":"CQUESTwithBruker-preproc", "tool-version":"0.6", 
 "container-image":{"index":"docker://", "image":"preproc_cquest:0.6", "type":"docker"}, 
 "author":"Hélène RATINEY / Denis Grenier / Théotime Ferh--Delude", 
 "description":"Proprocessing pipeline for spectroscopy signals acquired on a Brucker MRI followed by cQuest MR spectrosocpy signal quantification software.<br />", 
-"command-line":"mkdir out; unzip [MYZIP]; metaboliteFile=$(grep -m 1 '^met=' [PARAM_FILE] | cut -d ' ' -f1 | cut -d '=' -f2); python3 /bruker-spectro-processing-pipeline/crea_prepro.py [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE] [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --metabolite $metaboliteFile --outname [OUTNAME] --outpath ./; echo \"Preprocessing finished, listing files and launching cQuest\"; ls ; /cquest_exec/cquestCml -f [PARAM_FILE] [OUTNAME]Bruker.mrui > stdout_cquest.txt ; cat stdout_cquest.txt; /cquest_exec/cquestCml -f [PARAM_FILE] [OUTNAME]RecoSuspectPastis.mrui > stdout_cquest.txt ; cat stdout_cquest.txt; ls; tar -czvf [OUT_FILE] [OUTNAME]_summary.pdf *.mrui *.txt", 
+"command-line":"mkdir out; unzip [MYZIP]; metaboliteFile=$(grep -m 1 '^met=' [PARAM_FILE] | cut -d ' ' -f1 | cut -d '=' -f2); python3 /bruker-spectro-processing-pipeline/vip_prepro.py [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE] [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --metabolite $metaboliteFile --outname [OUTNAME] --outpath ./; echo \"Preprocessing finished, listing files and launching cQuest\"; ls ; /cquest_exec/cquestCml -f [PARAM_FILE] [BRUKER_MRUI]; /cquest_exec/cquestCml -f [PARAM_FILE] [PASTIS_MRUI]", 
 "schema-version":"0.5", 
 "inputs":[
 {"id":"fid", "name":"fid", "type":"File", "description":"Path to the fid file", "command-line-flag":"--fid", "value-key":"[FIDFILE]"},
@@ -21,4 +21,50 @@
 {"id":"stdev_lw_Hz", "name":"stdev_lw_Hz", "type":"Number", "optional":true, "default-value":2, "description":"acceptable standard deviation around the mean linewidth (Hz)", "command-line-flag":"--stdev_lw_Hz", "value-key":"[STDEV_LW]"},
 {"id":"stdev_fr_ppm", "name":"stdev_fr_ppm", "type":"Number", "optional":true, "default-value":0.03, "description":"acceptable standard deviation/amplitude of the frequency fluctuation/drift in ppm", "command-line-flag":"--stdev_fr_ppm", "value-key":"[STDEV_FR]"},
 {"id":"mv_av", "name":"mv_av", "type":"Number", "integer":true, "optional":true, "default-value":11, "description":"number of spectra in a moving average used in the analyze and reject procedure", "command-line-flag":"--mv_av", "value-key":"[MV_AV]"}], 
-"output-files":[{"description":"A tarball containing all result files", "id":"output_file", "list":false, "name":"Output file", "value-key":"[OUT_FILE]", "path-template":"[OUTNAME]--[PARAM_FILE].tgz"}]}
+"output-files":[
+{	"description":"Pastis MRUI reconstructed data", 
+	"id":"mrui_pastis",
+	"list":false,
+	"name":"Pastis MRUI Reconstructed",
+	"value-key":"[PASTIS_MRUI]",
+	"path-template":"[OUTNAME]RecPastis.mrui"
+},
+{	"description":"Bruker MRUI reconstructed data", 
+	"id":"mrui_bruker",
+	"list":false,
+	"name":"Pastis MRUI Reconstructed",
+	"value-key":"[BRUKER_MRUI]",
+	"path-template":"[OUTNAME]RecBruker.mrui"
+},
+{	"description":"Pastis RAW reconstructed data", 
+	"id":"raw_pastis",
+	"list":false,
+	"name":"Pastis MRUI Reconstructed",
+	"path-template":"[OUTNAME]RecPastis.RAW"
+},
+{	"description":"Bruker RAW reconstructed data", 
+	"id":"raw_bruker",
+	"list":false,
+	"name":"Pastis MRUI Reconstructed",
+	"path-template":"[OUTNAME]RecBruker.RAW"
+},
+{	"description":"PDF reconstruction summary", 
+	"id":"pdf",
+	"list":false,
+	"name":"PDF",
+	"path-template":"[OUTNAME]-summary.pdf"
+},
+{	"description":"CQUEST output for Pastis MRUI", 
+	"id":"cquest_pastis",
+	"list":false,
+	"name":"CQUEST pastis",
+	"path-template":"[OUTNAME]RecPastis_quest2.txt"
+},
+{	"description":"CQUEST output for Bruker MRUI", 
+	"id":"cquest_bruker",
+	"list":false,
+	"name":"CQUEST bruker",
+	"path-template":"[OUTNAME]RecBruker_quest2.txt"
+}],
+"custom":{"vip:dotInputs":["results-directory","fid","acqp","method","refscan","rawjob0","outname"]}
+}
