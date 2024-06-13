@@ -8,7 +8,7 @@
 		"type": "docker",
 		"image": "glm:0.1",
 		"container-opts": [
-			"--ulimit nofile=122880:122880"
+			"--ulimit nofile=65536:65536"
 		]
 	},
 	"author": "Carole Lartizien",
