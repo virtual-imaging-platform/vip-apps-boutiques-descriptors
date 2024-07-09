@@ -1,0 +1,37 @@
+{
+  "name": "comete_moelle",
+  "tool-version": "0.1",
+  "author": "EMPENN",
+  "description": "Spinal cord lesion segmentation from T2 and STIR images.<br />",
+  "command-line": "unzip [INPUT_T2] -d T2_input; unzip [INPUT_STIR] -d STIR_input; mkdir output_folder; python3 /app_primus/inference_multimodal.py -t T2_input_input -s STIR_input -o output_folder; cp input_param_file.json output_folder/input_params.json; tar -cvzf [OUTPUT_FILE] output_folder && rm -rf output_folder && chmod -R 777 *",
+  "schema-version": "0.5",
+   "container-image":{
+	  "type": "docker",
+	  "image": "comete_moelle:latest"
+  },
+  "inputs": [{
+      "id": "t2_archive",
+      "name": "T2 archive",
+      "type": "File",
+      "description": "NIfTI ZIP of T2 image",
+      "value-key": "[INPUT_T2]"
+    },
+    {
+      "id": "stir_archive",
+      "name": "STIR archive",
+      "type": "File",
+      "description": "NIfTI ZIP of STIR images",
+      "value-key": "[INPUT_STIR]"
+    }
+  ],
+  "output-files": [{
+      "description" : "Tarball containing results. ",
+      "id" : "outarchive",
+      "name" : "Output archive",
+      "path-template": "[INPUT_T2]_output.tgz",
+      "value-key": "[OUTPUT_FILE]"
+    }],
+  "custom":{
+     "vip:dot":["t2_archive","stir_archive"]
+  }
+}
