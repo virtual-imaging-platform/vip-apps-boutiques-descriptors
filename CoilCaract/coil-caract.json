@@ -1,0 +1,36 @@
+{
+	"name":"Coil Characterization",
+	"tool-version":"3.3",
+	"description":"Coil Characterization",
+	"command-line":"caract_inside.sh [COIL] [FANTOM] [DATA]",
+	"container-image":{
+		"type": "docker",
+		"image": "coil-caract:3.3"
+	},
+	"schema-version":"0.5",
+	"inputs":[{
+		"id":"coil",
+		"name":"coil",
+		"type":"String",
+		"description":"coil",
+		"value-key":"[COIL]"
+	},{
+		"id":"fantom",
+		"name":"fantom",
+		"type":"String",
+		"description":"fantom",
+		"value-key":"[FANTOM]"
+	},{
+		"id":"data",
+		"name":"data",
+		"type":"String",
+		"description":"data",
+		"value-key":"[DATA]"
+	}],
+	"output-files":[{
+		"id":"reportFile",
+		"name":"reportFile",
+		"description":"reportFile",
+		"path-template":"reportFile",
+		"optional":true}]
+}
