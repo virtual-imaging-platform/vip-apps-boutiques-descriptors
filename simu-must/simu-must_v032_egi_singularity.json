@@ -1,0 +1,88 @@
+{
+    "name": "simu-must",
+    "tool-version": "0.3.2_egi_singularity",
+    "container-image": {
+        "image": "simu_must_v032",
+        "type": "singularity"
+    },
+    "author": "Khuram Faraz",
+    "description": "TO BE COMPLETED",
+    "command-line": "source /root/envs/vip/bin/activate && HYDRA_FULL_ERROR=1 python /root/git/PySimus/pysimus/sequence_simulation_script.py data=[DATATYPE] scat=[SCAT] output_dir=[OUTNAME] simus_version=[SVERSION] patient_path=../../../[PATIENT_FILE] mesh_path=../../../[MESH_FILE] polar_path=../../../[POLAR_FILE] NumWorkers=1 && tar -czvf [OUTNAME].tgz [OUTNAME] && rm -rf [OUTNAME]",
+    "schema-version": "0.5",
+    "inputs": [
+        {
+            "id": "datatype",
+            "name": "datatype",
+            "type": "String",
+            "description": "TO BE COMPLETED",
+			"value-choices": [
+                "vipge",
+                "TO BE COMPLETED"
+            ],
+            "default-value": "vipge",
+            "value-key": "[DATATYPE]"
+        },
+		{
+            "id": "scat",
+            "name": "scat",
+            "type": "String",
+            "description": "TO BE COMPLETED",
+			"value-choices": [
+                "old",
+                "TO BE COMPLETED"
+            ],
+            "default-value": "old",
+            "value-key": "[SCAT]"
+        },
+		{
+            "id": "simus_version",
+            "name": "simus_version",
+            "type": "String",
+            "description": "TO BE COMPLETED",
+			"value-choices": [
+                "hybrid",
+                "TO BE COMPLETED"
+            ],
+            "default-value": "hybrid",
+            "value-key": "[SVERSION]"
+        },
+		{
+            "id": "outname",
+            "name": "outname",
+            "type": "String",
+            "description": "Name of the simulation output folder",
+            "value-key": "[OUTNAME]"
+        },
+        {
+            "id": "patient_file",
+            "name": "patient_file",
+            "type": "File",
+            "description": "TO BE COMPLETED",
+            "value-key": "[PATIENT_FILE]"
+        },
+        {
+            "id": "mesh_file",
+            "name": "mesh_file",
+            "type": "File",
+            "description": "TO BE COMPLETED",
+            "value-key": "[MESH_FILE]"
+        },
+        {
+            "id": "polar_file",
+            "name": "polar_file",
+            "type": "File",
+            "description": "TO BE COMPLETED",
+            "value-key": "[POLAR_FILE]"
+        }
+    ],
+    "output-files": [
+        {
+            "id": "output_archive",
+            "name": "Output archive",
+            "optional": false,
+            "path-template": "[OUTNAME].tgz"
+        }
+    ],
+	"custom": {"vip:dot": ["patient_file", "polar_file", "mesh_file", "outname"],
+			   "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/simu_must_v032.sif"}
+}
