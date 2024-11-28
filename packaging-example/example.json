@@ -4,7 +4,7 @@
     "author": "Your name",
     "tool-version": "v0.0.1",
     "schema-version": "0.5",
-    "command-line": "python3 /home/vip/example.py --input1=[INPUT1] --input2=[INPUT2] --output=[OUTPUT1]",
+    "command-line": "python3 /home/vip/example.py --input1=[INPUT1] --input2=[INPUT2] --output=[OUTNAME]",
     "container-image": {
         "image": "myname/example:v0.0.1",
         "index": "docker://",
@@ -22,14 +22,20 @@
             "name": "Input2",
             "type": "File",
             "value-key": "[INPUT2]"
+        },
+        {
+            "id": "outname",
+            "name": "Outname",
+            "type": "String",
+            "value-key": "[OUTNAME]"
         }
     ],
     "output-files": [
         {
-            "id": "output1",
-            "name": "Output1",
+            "id": "outfile",
+            "name": "Outfile",
             "optional": false,
-            "path-template": "[OUTPUT1]"
+            "path-template": "[OUTNAME]"
         }
     ]
 }

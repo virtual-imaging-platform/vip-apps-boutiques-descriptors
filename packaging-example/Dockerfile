@@ -10,19 +10,17 @@ RUN groupadd -g $USER_GID vip && \
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential && \
+    apt-get install -y --no-install-recommends git && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy app program files into the container
-COPY ./example.py /home/vip/example.py
+# Install program files from a git tag ...
+RUN git clone --depth=1 --branch=main https://github.com/virtual-imaging-platform/vip-apps-boutiques-descriptors /tmp/gitrepo && (cd /tmp/gitrepo/packaging-example && mv example.py /home/vip/) && rm -rf /tmp/gitrepo
+
+# ... or directly copy program files into the container
+#COPY ./example.py /home/vip/example.py
 
 # Install app dependencies
-# RUN python -m venv /home/vip/venv && \
-#    source /home/vip/venv/bin/activate && \
-#    cd /home/vip/example && \
-#    pip install
-
-# Set executable permissions for non-root user
-# RUN chown -R root:root /home/vip/example && \
-#    chmod 755 /home/vip/example
+#USER vip
+#WORKDIR /home/vip
+#RUN pip install --no-cache-dir -r requirements.txt
 
