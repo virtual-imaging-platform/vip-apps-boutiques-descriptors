@@ -4,7 +4,7 @@
     "author": "Your name",
     "tool-version": "v0.0.1",
     "schema-version": "0.5",
-    "command-line": "python3 /home/vip/example.py --input1=[INPUT1] --input2=[INPUT2] --output=[OUTNAME]",
+    "command-line": "python3 /app/example.py --input1=[INPUT1] --input2=[INPUT2] --output=[OUTNAME]",
     "container-image": {
         "image": "myname/example:v0.0.1",
         "index": "docker://",
