@@ -1,0 +1,45 @@
+{
+  "name": "GateLab",
+  "tool-version": "0.7.4",
+  "author": "Need to be completed",
+  "description": "This application runs GATE on the European Grid Infrastructure. The documentation entry point is available <a href=\"http://www.opengatecollaboration.org/gatelab\">here</a>.",
+  "command-line": "echo GateLab must not be run with boutiques, something went wrong",
+  "schema-version": "0.5",
+  "inputs": [{
+      "id": "CPUestimation",
+      "name": "Duration estimation",
+      "type": "Number",
+      "integer": true,
+      "value-choices": [1,2,3,4],
+      "description": "An estimation of the total running time of your simulation on a single machine. This parameter is used to determine the number of jobs into which your simulation will be split."
+    },{
+      "id": "GateInput",
+      "name": "Gate archive input",
+      "type": "File",
+      "description": "A zip file produced by the GATE-Lab containing all your simulation input files"
+    },{
+      "id": "GateRelease",
+      "name": "Gate release",
+      "type": "String",
+      "description": "The release of the GATE simulator that will be used to run your simulation. Contact the admins if you're looking for a release which is not available."
+    },{
+      "id": "NumberOfParticles",
+      "name": "Number of particles",
+      "type": "Number",
+      "integer": true,
+      "description": "The number of events found in your macro file."
+    },{
+      "id": "ParallelizationType",
+      "name": "Parallelization type",
+      "type": "String",
+      "value-choices": ["stat", "dyn"],
+      "description": "Using dynamic mode is faster but it can compromise the validity of your simulation. Read the <a href=\"http://www.opengatecollaboration.org/gatelab\">documentation</a> to determine if you can use it."
+    },{
+      "id": "phaseSpace",
+      "name": "Extra options",
+      "type": "String",
+      "optional": true,
+      "description": "Useful for aliases."
+    }
+  ]
+}
