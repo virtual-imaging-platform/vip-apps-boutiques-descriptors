@@ -1,5 +1,5 @@
 {
-  "name": "BasicGrep",
+  "name": "BasicGrepDockerDirac",
   "tool-version": "0.2",
   "author": "Ethaniel Billon",
   "description": "Test pipelines that search text in a file (with docker).<br />",

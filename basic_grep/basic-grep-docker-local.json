@@ -1,0 +1,43 @@
+{
+  "name": "BasicGrepLocal",
+  "tool-version": "0.2",
+  "author": "Ethaniel Billon",
+  "description": "Test pipelines that search text in a file (with docker).<br />",
+  "command-line": "sleep [DELAY] && grep [TEXT] [INPUT] > [OUTPUT]; cat [OUTPUT]",
+  "schema-version": "0.5",
+  "container-image": {
+  	"image": "busybox",
+  	"index": "hub.docker.com",
+  	"type": "docker"
+  },
+  "inputs": [{
+      "id": "text",
+      "name": "Text",
+      "type": "String",
+      "description": "Text to search",
+      "value-key": "[TEXT]"
+    },
+    {
+      "id": "file",
+      "name": "File",
+      "type": "File",
+      "description": "File to search in",
+      "value-key": "[INPUT]"
+    },
+    {
+      "id": "int",
+      "name": "Delay",
+      "type": "Number",
+      "default-value": 1,
+      "integer": true,
+      "description": "Delay to apply on the execution in seconds",
+      "value-key": "[DELAY]"
+    }
+  ],
+  "output-files": [{
+    "id": "output",
+    "name": "output file",
+    "path-template": "output_[TEXT].txt",
+    "value-key": "[OUTPUT]"
+  }]
+}
