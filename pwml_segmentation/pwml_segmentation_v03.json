@@ -4,7 +4,7 @@
     "author": "Flora Estermann",
     "tool-version": "v0.3",
     "schema-version": "0.5",
-    "command-line": "python3 /app/PWML_Detection_and_Segmentation/main.py -in=[INPUT1] -out=[OUTNAME] && mv 'output\\full_brain_image.nrrd' output/full_brain_image.nrrd && mv 'output\\full_brain_prediction.nrrd' output/full_brain_prediction.nrrd",
+    "command-line": "python3 /app/PWML_Detection_and_Segmentation/main.py -in=[INPUT1] -out=output && mv 'output\\full_brain_image.nrrd' output/$(basename \"[INPUT1]\" .mat)-full_brain_image.nrrd && mv 'output\\full_brain_prediction.nrrd' output/$(basename \"[INPUT1]\" .mat)-full_brain_prediction.nrrd",
     "container-image": {
         "image": "pwml_segmentation:v0.3",
         "index": "docker://",
@@ -14,22 +14,27 @@
         {
             "id": "input1",
             "name": "Volume ETF (format .mat)",
+            "description": "",
             "type": "File",
             "value-key": "[INPUT1]"
-        },
-        {
-            "id": "outname",
-            "name": "Outname",
-            "type": "String",
-            "value-key": "[OUTNAME]"
         }
     ],
     "output-files": [
         {
-            "id": "outfile",
-            "name": "Outfile",
+            "id": "outfile1",
+            "name": "Outfile2",
+            "description": "",
             "optional": false,
-            "path-template": "[OUTNAME]"
+            "path-template": "./output/[INPUT1]-full_brain_image.nrrd",
+            "path-template-stripped-extensions": [".mat"]
+        },
+        {
+            "id": "outfile2",
+            "name": "Outfile2",
+            "description": "",
+            "optional": false,
+            "path-template": "./output/[INPUT1]-full_brain_prediction.nrrd",
+            "path-template-stripped-extensions": [".mat"]
         }
     ]
 }
