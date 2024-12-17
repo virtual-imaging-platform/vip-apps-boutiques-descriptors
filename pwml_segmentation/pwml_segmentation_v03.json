@@ -1,0 +1,35 @@
+{
+    "name": "PWML_Detection_and_Segmentation",
+    "description": "Pipeline for automatic PWML detection and segmentation in 3D cranial ultrasound.",
+    "author": "Flora Estermann",
+    "tool-version": "v0.3",
+    "schema-version": "0.5",
+    "command-line": "python3 /app/PWML_Detection_and_Segmentation/main.py -in=[INPUT1] -out=[OUTNAME] && mv 'output\\full_brain_image.nrrd' output/full_brain_image.nrrd && mv 'output\\full_brain_prediction.nrrd' output/full_brain_prediction.nrrd",
+    "container-image": {
+        "image": "pwml_segmentation:v0.3",
+        "index": "docker://",
+        "type": "docker"
+    },
+    "inputs": [
+        {
+            "id": "input1",
+            "name": "Volume ETF (format .mat)",
+            "type": "File",
+            "value-key": "[INPUT1]"
+        },
+        {
+            "id": "outname",
+            "name": "Outname",
+            "type": "String",
+            "value-key": "[OUTNAME]"
+        }
+    ],
+    "output-files": [
+        {
+            "id": "outfile",
+            "name": "Outfile",
+            "optional": false,
+            "path-template": "[OUTNAME]"
+        }
+    ]
+}
