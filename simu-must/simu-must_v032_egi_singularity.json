@@ -7,7 +7,7 @@
     },
     "author": "Khuram Faraz",
     "description": "TO BE COMPLETED",
-    "command-line": "source /root/envs/vip/bin/activate && HYDRA_FULL_ERROR=1 python /root/git/PySimus/pysimus/sequence_simulation_script.py data=[DATATYPE] scat=[SCAT] output_dir=[OUTNAME] simus_version=[SVERSION] patient_path=../../../[PATIENT_FILE] mesh_path=../../../[MESH_FILE] polar_path=../../../[POLAR_FILE] NumWorkers=1 && tar -czvf [OUTNAME].tgz [OUTNAME] && rm -rf [OUTNAME]",
+    "command-line": "source /root/envs/vip/bin/activate && HYDRA_FULL_ERROR=1 python /root/git/PySimus/pysimus/sequence_simulation_script.py data=[DATATYPE] scat=[SCAT] output_dir=[OUTNAME] simus_version=[SVERSION] patient_path=../../../[PATIENT_FILE] mesh_path=../../../[MESH_FILE] polar_path=../../../[POLAR_FILE] NumWorkers=2 && tar -czvf [OUTNAME].tgz [OUTNAME] && rm -rf [OUTNAME]",
     "schema-version": "0.5",
     "inputs": [
         {
@@ -84,5 +84,5 @@
         }
     ],
 	"custom": {"vip:dot": ["patient_file", "polar_file", "mesh_file", "outname"],
-			   "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/simu_must_v032.sif"}
+	"vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/simu-must-v0.3.2"}
 }
