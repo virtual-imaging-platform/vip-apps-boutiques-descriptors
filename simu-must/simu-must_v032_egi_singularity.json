@@ -14,7 +14,7 @@
             "id": "datatype",
             "name": "datatype",
             "type": "String",
-            "description": "TO BE COMPLETED",
+            "description": "Patient data source being used (vendor or database etc.)",
 			"value-choices": [
                 "vipge",
                 "TO BE COMPLETED"
@@ -26,10 +26,12 @@
             "id": "scat",
             "name": "scat",
             "type": "String",
-            "description": "TO BE COMPLETED",
+            "description": "Scatterer generation method",
 			"value-choices": [
                 "old",
-                "TO BE COMPLETED"
+                "corr",
+                "int",
+                "corr-int"
             ],
             "default-value": "old",
             "value-key": "[SCAT]"
@@ -38,10 +40,11 @@
             "id": "simus_version",
             "name": "simus_version",
             "type": "String",
-            "description": "TO BE COMPLETED",
+            "description": "The type of simus implementation",
 			"value-choices": [
                 "hybrid",
-                "TO BE COMPLETED"
+                "python",
+                "cpp"
             ],
             "default-value": "hybrid",
             "value-key": "[SVERSION]"
@@ -57,21 +60,21 @@
             "id": "patient_file",
             "name": "patient_file",
             "type": "File",
-            "description": "TO BE COMPLETED",
+            "description": "Patient ultrasound image file",
             "value-key": "[PATIENT_FILE]"
         },
         {
             "id": "mesh_file",
             "name": "mesh_file",
             "type": "File",
-            "description": "TO BE COMPLETED",
+            "description": "Mesh file of the patient image",
             "value-key": "[MESH_FILE]"
         },
         {
             "id": "polar_file",
             "name": "polar_file",
             "type": "File",
-            "description": "TO BE COMPLETED",
+            "description": "Polar image of the patient data",
             "value-key": "[POLAR_FILE]"
         }
     ],
