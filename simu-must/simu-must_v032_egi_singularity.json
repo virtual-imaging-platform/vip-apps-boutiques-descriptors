@@ -5,8 +5,8 @@
         "image": "simu_must_v032",
         "type": "singularity"
     },
-    "author": "Khuram Faraz",
-    "description": "TO BE COMPLETED",
+    "author": "Damien Garcia, Gabriel Bernardino, Khuram Faraz",
+    "description": "A Python and C++ hybrid implementation of Matlab Ultrasound Toolbox (MUST). A detailed description of MUST and its documentation can be found at: https:/www.biomecardio.com/MUST/",
     "command-line": "source /root/envs/vip/bin/activate && OUTDIR=$(basename [OUTNAME] .tgz) && HYDRA_FULL_ERROR=1 python /root/git/PySimus/pysimus/sequence_simulation_script.py data=[DATATYPE] scat=[SCAT] output_dir=$OUTDIR simus_version=[SVERSION] patient_path=../../../[PATIENT_FILE] mesh_path=../../../[MESH_FILE] polar_path=../../../[POLAR_FILE] NumWorkers=2 && tar -czvf [OUTNAME] $OUTDIR && rm -rf $OUTDIR",
     "schema-version": "0.5",
     "inputs": [
