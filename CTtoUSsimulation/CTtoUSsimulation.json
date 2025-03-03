@@ -4,7 +4,7 @@
     "author": "Nicolas Moyne",
     "tool-version": "v0.0.1",
     "schema-version": "0.5",
-    "command-line": "ulimit -n 65536 && /home/run_createBDD.sh /usr/local/MATLAB/MATLAB_Runtime/R2024b [SEED] [CONTRAST] [FIBROSIS] [MINM] [MAXM] [MINMRATIO] [MAXMRATIO] [MINRCRATIO] [MAXRCRATIO] [CT] [LIVER_MASK] [BM] [DICT] [FIBROSIS_MASK] [SCAT_MAT] [NCT]",
+    "command-line": "/home/run_createBDD.sh /usr/local/MATLAB/MATLAB_Runtime/R2024b [SEED] [CONTRAST] [FIBROSIS] [MINM] [MAXM] [MINMRATIO] [MAXMRATIO] [MINRCRATIO] [MAXRCRATIO] [CT] [LIVER_MASK] [BM] [DICT] [FIBROSIS_MASK] [SCAT_MAT] [NCT]",
     "container-image": {
         "image": "CTtoUSsimulation-v001",
         "type": "singularity"
