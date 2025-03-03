@@ -1,0 +1,136 @@
+{
+    "name": "CTtoUSsimulation",
+    "description": "Ultrasound image simulation with MATLAB and SIMUS. SImulates B-mode images from CT scans, with the possibility to add a liver inclusion to simulate fibrosis",
+    "author": "Nicolas Moyne",
+    "tool-version": "v0.0.1",
+    "schema-version": "0.5",
+    "command-line": "ulimit -n 65536 && /home/run_createBDD.sh /usr/local/MATLAB/MATLAB_Runtime/R2024b [SEED] [CONTRAST] [FIBROSIS] [MINM] [MAXM] [MINMRATIO] [MAXMRATIO] [MINRCRATIO] [MAXRCRATIO] [CT] [LIVER_MASK] [BM] [DICT] [FIBROSIS_MASK] [SCAT_MAT] [NCT]",
+    "container-image": {
+        "image": "CTtoUSsimulation-v001",
+        "type": "singularity"
+    },
+    "inputs": [
+        {
+            "id": "seed",
+            "name": "Seed",
+            "type": "Number",
+            "value-key": "[SEED]",
+            "default-value" : 42
+        },
+        {
+            "id": "contrast",
+            "name": "Contrast",
+            "type": "String",
+            "value-key": "[CONTRAST]",
+            "value-choices": ["contrast", "no-contrast"],
+            "default-value" : "contrast"
+        },
+        {
+            "id": "fibrosis",
+            "name": "Fibrosis (liver, full or none)",
+            "type": "String",
+            "value-key": "[FIBROSIS]",
+            "value-choices": [ "liver", "full", "none" ],
+            "default-value": "none" 
+        },
+        {
+            "id": "minM",
+            "name": "MinM (scatterer density MEANDIST is between minM and maxM)",
+            "type": "Number",
+            "value-key": "[MINM]",
+            "default-value" : 3
+        },
+        {
+            "id": "maxM",
+            "name": "MaxM (scatterer density MEANDIST is between minM and maxM)",
+            "type": "Number",
+            "value-key": "[MAXM]",
+            "default-value" : 4
+        },
+        {
+            "id": "minMratio",
+            "name": "MinMratio (scatterer density scaling is between minMratio and maxMratio for fibrosis)",
+            "type": "Number",
+            "value-key": "[MINMRATIO]",
+            "default-value" : 0.5
+
+        },
+        {
+            "id": "maxMratio",
+            "name": "MaxMratio (scatterer density scaling is between minMratio and maxMratio for fibrosis)",
+            "type": "Number",
+            "value-key": "[MAXMRATIO]",
+            "default-value" : 2
+        },
+        {
+            "id": "minRCratio",
+            "name": "MinRCratio (scatterers reflexivity scaling is between minRCratio and maxRCratio for fibrosis)",
+            "type": "Number",
+            "value-key": "[MINRCRATIO]",
+            "default-value" : 0.5
+        },
+        {
+            "id": "maxRCratio",
+            "name": "MaxRCratio (scatterers reflexivity scaling is between minRCratio and maxRCratio for fibrosis)",
+            "type": "Number",
+            "value-key": "[MAXRCRATIO]",
+            "default-value" : 2
+        },
+        {
+            "id": "ct_img",
+            "name": "CT Scan (base image for scatterer density)",
+            "type": "File",
+            "value-key": "[CT]"
+        },
+        {
+            "id" : "liver_mask",
+            "name" : "Liver Mask",
+            "type" : "File",
+            "value-key" : "[LIVER_MASK]"
+        }
+        
+    ],
+    "output-files" : [
+        {
+            "id": "bmode",
+            "name": "B-mode image",
+            "path-template": "[CT]_bmode.png",
+            "path-template-stripped-extensions":[".png"],
+            "value-key": "[BM]"
+        },
+        {
+            "id": "parameter_dict",
+            "name": "Parameters dictionnary",
+            "path-template": "[CT]_dict.json",
+            "path-template-stripped-extensions":[".png"],
+            "value-key": "[DICT]"
+        },
+        {
+            "id": "fibrosis_mask",
+            "name": "Fibrosis mask",
+            "path-template": "[CT]_fibrosis_mask.jpg",
+            "path-template-stripped-extensions":[".png"],
+            "optional": true,
+            "value-key": "[FIBROSIS_MASK]"
+        },
+        {
+            "id": "scat_mat",
+            "name": "Scatterers matrix",
+            "path-template": "[CT]_scat.mat",
+            "path-template-stripped-extensions":[".png"],
+            "value-key": "[SCAT_MAT]"
+        },
+        {
+            "id": "normalized_ct",
+            "name": "Normalized CT image",
+            "path-template": "[CT]_normalized.png",
+            "path-template-stripped-extensions":[".png"],
+            "optional": true,
+            "value-key": "[NCT]"
+        }
+    ],
+    "custom": {
+        "vip:dot": ["ct_img", "liver_mask"],
+        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/CTtoUSsimulation-v001"
+    }
+}
