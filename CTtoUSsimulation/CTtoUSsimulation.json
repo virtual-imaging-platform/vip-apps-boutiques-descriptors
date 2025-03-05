@@ -2,11 +2,11 @@
     "name": "CTtoUSsimulation",
     "description": "Ultrasound image simulation with MATLAB and SIMUS. SImulates B-mode images from CT scans, with the possibility to add a liver inclusion to simulate fibrosis",
     "author": "Nicolas Moyne",
-    "tool-version": "v0.0.1",
+    "tool-version": "v0.0.2",
     "schema-version": "0.5",
-    "command-line": "/home/run_createBDD.sh /usr/local/MATLAB/MATLAB_Runtime/R2024b [SEED] [CONTRAST] [FIBROSIS] [MINM] [MAXM] [MINMRATIO] [MAXMRATIO] [MINRCRATIO] [MAXRCRATIO] [CT] [LIVER_MASK] [BM] [DICT] [FIBROSIS_MASK] [SCAT_MAT] [NCT]",
+    "command-line": "CT=$(basename [CT] .png) && /home/run_createBDD.sh /usr/local/MATLAB/MATLAB_Runtime/R2024b 1 [SEED] [CONTRAST] [FIBROSIS] [MINM] [MAXM] [MINMRATIO] [MAXMRATIO] [MINRCRATIO] [MAXRCRATIO] [CT] [LIVER_MASK] ${CT}_bmode.png ${CT}_dict.json ${CT}_fibrosis_mask.jpg ${CT}_scat.mat ${CT}_normalized.png && tar -czvf [OUTPUT] ${CT}_bmode.png ${CT}_dict.json ${CT}_scat.mat ${CT}_normalized.png $(test -e ${CT}_fibrosis_mask.jpg && echo ${CT}_fibrosis_mask.jpg)",
     "container-image": {
-        "image": "CTtoUSsimulation-v001",
+        "image": "CTtoUSsimulation-v002",
         "type": "singularity"
     },
     "inputs": [
@@ -88,49 +88,18 @@
             "type" : "File",
             "value-key" : "[LIVER_MASK]"
         }
-        
     ],
     "output-files" : [
         {
-            "id": "bmode",
-            "name": "B-mode image",
-            "path-template": "[CT]_bmode.png",
+            "id": "output",
+            "name": "Output files",
+            "path-template": "[CT].tar.gz",
             "path-template-stripped-extensions":[".png"],
-            "value-key": "[BM]"
-        },
-        {
-            "id": "parameter_dict",
-            "name": "Parameters dictionnary",
-            "path-template": "[CT]_dict.json",
-            "path-template-stripped-extensions":[".png"],
-            "value-key": "[DICT]"
-        },
-        {
-            "id": "fibrosis_mask",
-            "name": "Fibrosis mask",
-            "path-template": "[CT]_fibrosis_mask.jpg",
-            "path-template-stripped-extensions":[".png"],
-            "optional": true,
-            "value-key": "[FIBROSIS_MASK]"
-        },
-        {
-            "id": "scat_mat",
-            "name": "Scatterers matrix",
-            "path-template": "[CT]_scat.mat",
-            "path-template-stripped-extensions":[".png"],
-            "value-key": "[SCAT_MAT]"
-        },
-        {
-            "id": "normalized_ct",
-            "name": "Normalized CT image",
-            "path-template": "[CT]_normalized.png",
-            "path-template-stripped-extensions":[".png"],
-            "optional": true,
-            "value-key": "[NCT]"
+            "value-key": "[OUTPUT]"
         }
     ],
     "custom": {
         "vip:dot": ["ct_img", "liver_mask"],
-        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/CTtoUSsimulation-v001"
+        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/CTtoUSsimulation-v002"
     }
 }
