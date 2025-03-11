@@ -99,7 +99,7 @@
         }
     ],
     "custom": {
-        "vip:dot": ["ct_img", "liver_mask"],
+        "vip:dot": ["seed","ct_img", "liver_mask"],
         "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/CTtoUSsimulation-v002"
     }
 }
