@@ -1,13 +1,13 @@
 {
   "name": "ofsep_sequences_identification",
-  "tool-version": "0.4",
+  "tool-version": "0.4-4",
   "author": "Ofsep",
   "description": "ofsep_sequences_identification.<br />",
   "command-line": "echo '--------------ls -l ../------------' && ls -l  && unzip [INPUT]; sed -i \"s#/TOUPDATE#$PWD#g\" input.json; /app/ofsep_sequences_identification input.json output.json; cat output.json; mkdir output_folder && cp output.json output_folder && cp /inv/*-invocation.json output_folder/input_params.json && tar -cvzf .tmp-output.tgz output_folder && cp .tmp-output.tgz [OUTPUT_FILE]",
   "schema-version": "0.5",
   "container-image":{
     "type": "singularity",
-    "image": "ofsep_sequences_identification",
+    "image": "ofsep_sequences_identification:2",
     "container-opts": ["-B", "../inv:/inv"]
   },
   "inputs": [{
