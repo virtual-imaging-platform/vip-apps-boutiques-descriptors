@@ -1,6 +1,6 @@
 {
   "name": "ofsep_sequences_identification",
-  "tool-version": "3",
+  "tool-version": "3-1",
   "author": "Ofsep",
   "description": "ofsep_sequences_identification.<br />",
   "command-line": "echo '--------------ls -l ../------------' && ls -l  && unzip [INPUT]; sed -i \"s#/TOUPDATE#$PWD#g\" input.json; bash /app/SIMS/run_identification.sh input.json output.json; cat output.json; mkdir output_folder && cp output.json output_folder && cp /inv/*-invocation.json output_folder/input_params.json && tar -cvzf [OUTPUT_FILE] output_folder",
