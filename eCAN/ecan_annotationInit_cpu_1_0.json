@@ -1,6 +1,6 @@
 {
     "name": "annotationInit",
-    "tool-version": "0.1",
+    "tool-version": "1.0",
     "author": "Melodie Cassan / Sim&Cure",
     "description": "Annotation Initalization of arteries and aneurysm. An application for performing predictive inference using MONAI on 3DRA images",
     "schema-version": "0.5",
