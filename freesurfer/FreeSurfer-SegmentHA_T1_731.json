@@ -29,7 +29,7 @@
         },
         {
             "name": "Input tarball",
-            "id": "input_tarball",
+            "id": "in_tarball",
             "optional": false,
             "value-key": "[INPUT]",
             "description": "INPUT tarball containing recon-all results",
@@ -41,7 +41,7 @@
             "name": "Output",
             "optional": false,
             "description": "The output tarball including results from segmentHA_T1",
-            "id": "output_tarball",
+            "id": "out_tarball",
             "path-template": "[INPUT]_segmentHA.tar.gz",
 			"path-template-stripped-extensions": [".tgz"],
 			"value-key":"[RESULTS]"
