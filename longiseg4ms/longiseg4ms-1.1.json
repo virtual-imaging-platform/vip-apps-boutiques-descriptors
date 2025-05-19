@@ -1,0 +1,32 @@
+{
+  "name": "longiseg4ms",
+  "tool-version": "1.1",
+  "author": "EMPENN",
+  "description": "longiseg4ms.<br />",
+  "command-line": "cp -r /root/.anima $HOME/; UNET_INDIR=/data/nnunet/io; mkdir -p $UNET_INDIR; unzip [INPUT_FLAIR] -d $UNET_INDIR; UNET_OUTDIR=/data/nnunet/models/nnUNet/3d_fullres/Task205/nnUNetTrainerV2__nnUNetPlansv2.1; mkdir -p $UNET_OUTDIR; mkdir -p OUTDIR; (cd /longiseg && python3 predict.py -p $UNET_INDIR -tn Task205 -m flair -mn Task205_CS_FULL -f all -cs -o $UNET_OUTDIR) && cp -r $UNET_OUTDIR/Task205_CS_FULL OUTDIR && cp /inv/*-invocation.json OUTDIR/input_params.json && tar -cvzf [OUTPUT_FILE] OUTDIR",
+  "schema-version": "0.5",
+   "container-image":{
+          "type": "singularity",
+          "image": "longiseg4ms:1.1",
+          "container-opts": ["-B", "../inv:/inv"]
+  },
+
+  "inputs": [{
+      "id": "flair_archive",
+      "name": "flair archive",
+      "type": "File",
+      "description": "NIfTI ZIP of FLAIR image",
+      "value-key": "[INPUT_FLAIR]"
+    }
+  ],
+  "output-files": [{
+      "description" : "Tarball containing results. ",
+      "id" : "outarchive",
+      "name" : "Output archive",
+      "path-template": "[INPUT_FLAIR]_output.tgz",
+      "value-key": "[OUTPUT_FILE]"
+    }],
+  "custom":{
+     "vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/longiseg4ms-1.1.sif"
+  }
+}
