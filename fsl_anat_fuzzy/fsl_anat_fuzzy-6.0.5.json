@@ -1,7 +1,7 @@
 {
     "tool-version": "6.0.5",
     "name": "fsl_anat_fuzzy",
-    "command-line": "fsl_anat [INPUT_FILE] [OUTPUT_DIR] [CLOBBER_FLAG] [WEAKBIAS_FLAG] [NO_REORIENT_FLAG] [NO_CROP_FLAG] [NO_BIAS_FLAG] [NO_REGISTRATION_FLAG] [NO_NONLINEAR_REG_FLAG] [NO_SEG_FLAG] [NO_SUBCORTSEG_FLAG] [NO_SEARCH_FLAG] [NO_CLEANUP_FLAG] [BIAS_FIELD_SMOOTHING_VAL] [IMAGE_TYPE] [BET_F_PARAM] && tar -czvf [OUTPUT_DIR].tgz [OUTPUT_DIR].anat",
+    "command-line": "fsl_anat [INPUT_FILE] -o [OUTPUT_DIR] [CLOBBER_FLAG] [WEAKBIAS_FLAG] [NO_REORIENT_FLAG] [NO_CROP_FLAG] [NO_BIAS_FLAG] [NO_REGISTRATION_FLAG] [NO_NONLINEAR_REG_FLAG] [NO_SEG_FLAG] [NO_SUBCORTSEG_FLAG] [NO_SEARCH_FLAG] [NO_CLEANUP_FLAG] [BIAS_FIELD_SMOOTHING_VAL] [IMAGE_TYPE] [BET_F_PARAM] && tar -czvf [OUTPUT_DIR].tgz [OUTPUT_DIR].anat",
     "container-image": {
         "image": "yohanchatelain/fsl:6.0.5_fuzzy",
         "index": "index.docker.io",
@@ -19,7 +19,6 @@
             "name": "Input file"
         },
         {
-            "command-line-flag": "-o",
             "description": "Specifies the output folder name. Note that the .anat extension is automatically appended.",
             "default-value": "output_results",
             "value-key": "[OUTPUT_DIR]",
