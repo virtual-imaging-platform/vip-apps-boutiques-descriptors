@@ -23,8 +23,5 @@
       "name" : "Output archive",
       "path-template": "[DICOM_INPUT]_output.tgz",
       "value-key": "[OUTPUT_FILE]"
-    }],
-    "custom":{
-      "vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/rhum_v1.0.sif"
-    }
+    }]
 }

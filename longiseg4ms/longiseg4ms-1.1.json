@@ -24,8 +24,5 @@
       "name" : "Output archive",
       "path-template": "[INPUT_FLAIR]_output.tgz",
       "value-key": "[OUTPUT_FILE]"
-    }],
-  "custom":{
-     "vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/longiseg4ms-1.1.sif"
-  }
+    }]
 }

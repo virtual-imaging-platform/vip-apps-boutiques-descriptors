@@ -32,7 +32,6 @@
       "value-key": "[OUTPUT_FILE]"
     }],
   "custom":{
-     "vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/comete.sif",
      "vip:dot":["t2_archive","stir_archive"]
   }
 }

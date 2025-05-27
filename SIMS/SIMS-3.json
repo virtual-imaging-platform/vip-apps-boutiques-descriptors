@@ -23,6 +23,5 @@
     "name" : "Output archive",
     "path-template": "[INPUT]_output.tgz",
     "value-key": "[OUTPUT_FILE]"
-  }],
-  "custom": {"vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/ofsep_sequences_identification_v3.sif"}
+  }]
 }
