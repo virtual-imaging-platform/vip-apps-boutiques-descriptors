@@ -6,9 +6,8 @@
   "command-line": "unzip [INPUT_T2] -d T2DIR; unzip [INPUT_STIR] -d STIRDIR; mkdir OUTDIR ; export PATH=\"$PATH:/sct/spinalcordtoolbox/bin\"; python3 /app_primus/inference_multimodal.py -t T2DIR -s STIRDIR -o OUTDIR && cp /inv/*-invocation.json OUTDIR/input_params.json && tar -cvzf [OUTPUT_FILE] OUTDIR ; chmod -R 777 *",
   "schema-version": "0.5",
    "container-image":{
-	  "type": "singularity",
-	  "image": "comete_moelle:latest",
-      "container-opts": ["-B", "../inv:/inv"]
+	  "type": "docker",
+	  "image": "covid.creatis.insa-lyon.fr/vip-support/comete_sc_t2_stir:0.1"
   },
   "inputs": [{
       "id": "t2_archive",
@@ -33,7 +32,6 @@
       "value-key": "[OUTPUT_FILE]"
     }],
   "custom":{
-     "vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/comete_sc_t2_stir_v0.2.sif",
      "vip:dot":["t2_archive","stir_archive"]
   }
 }

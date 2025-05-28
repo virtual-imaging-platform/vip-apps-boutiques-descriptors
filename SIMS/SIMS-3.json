@@ -6,9 +6,8 @@
   "command-line": "echo '--------------ls -l ../------------' && ls -l  && unzip [INPUT]; sed -i \"s#/TOUPDATE#$PWD#g\" input.json; bash /app/SIMS/run_identification.sh input.json output.json && cat output.json && mkdir output_folder && cp output.json output_folder && cp /inv/*-invocation.json output_folder/input_params.json && tar -cvzf [OUTPUT_FILE] output_folder",
   "schema-version": "0.5",
   "container-image":{
-    "type": "singularity",
-    "image": "ofsep_sequences_identification:3",
-    "container-opts": ["-B", "../inv:/inv"]
+    "type": "docker",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/SIMS:3"
   },
   "inputs": [{
     "id": "dicom_archive",
@@ -24,6 +23,5 @@
     "name" : "Output archive",
     "path-template": "[INPUT]_output.tgz",
     "value-key": "[OUTPUT_FILE]"
-  }],
-  "custom": {"vip:imagepath": "/nfs/sto-2/projects/cnt-000050/apptainer-images/ofsep_sequences_identification_v3.sif"}
+  }]
 }
