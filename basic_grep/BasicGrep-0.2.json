@@ -1,5 +1,5 @@
 {
-  "name": "BasicGrepDocker",
+  "name": "BasicGrep",
   "tool-version": "0.2",
   "author": "Ethaniel Billon",
   "description": "Test pipelines that search text in a file (with docker).<br />",
@@ -36,7 +36,7 @@
   "output-files": [{
     "id": "output",
     "name": "output file",
-    "path-template": "output_[TEXT].txt",
+    "path-template": "grep_[TEXT]_[INPUT]",
     "value-key": "[OUTPUT]"
   }]
 }
