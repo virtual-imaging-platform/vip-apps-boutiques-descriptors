@@ -2,7 +2,7 @@
     "name": "PWML_Detection_and_Segmentation",
     "description": "Punctate white matter lesions (PWML) are the most common white matter injuries observed in preterm neonates, with several studies reporting a link between these lesions and adverse long-term outcomes. Automated PWML detection through cranial ultrasound (cUS) imaging could better assist doctors in diagnosis, at a lower cost than MRI. However it is very challenging due to the small size and low contrast of lesions, and the number of lesions can also vary considerably across subjects. With this tool, we propose a two-phase strategy: 1) Segmentation with a vision transformer to increase the numberof detected lesions. 2) Multi-view classification based on cross-attention to reduce the number of false alarms and improve precision. Finally, we also apply multiple postprocessing approaches to ensure the quality of predictions and compare our results with what is known in MRI.",
     "author": "Flora Estermann",
-    "tool-version": "v0.3",
+    "tool-version": "0.3",
     "schema-version": "0.5",
     "command-line": "python3 /app/PWML_Detection_and_Segmentation/main.py -in=[INPUT1] -out=output && mv output/full_brain_image.nrrd [OUTPUT1] && mv output/full_brain_prediction.nrrd [OUTPUT2]",
     "container-image": {

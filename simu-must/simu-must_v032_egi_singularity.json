@@ -1,6 +1,6 @@
 {
     "name": "simu-must",
-    "tool-version": "0.3.2_egi_singularity",
+    "tool-version": "0.3.2",
     "container-image": {
         "image": "simu_must_v032",
         "type": "singularity"

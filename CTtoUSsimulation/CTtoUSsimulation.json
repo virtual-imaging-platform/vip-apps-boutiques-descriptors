@@ -2,7 +2,7 @@
     "name": "CTtoUSsimulation",
     "description": "Ultrasound image simulation with MATLAB and SIMUS. SImulates B-mode images from CT scans, with the possibility to add a liver inclusion to simulate fibrosis",
     "author": "Nicolas Moyne",
-    "tool-version": "v0.0.2",
+    "tool-version": "0.0.2",
     "schema-version": "0.5",
     "command-line": "CT=$(basename [CT] .png) && /home/run_createBDD.sh /usr/local/MATLAB/MATLAB_Runtime/R2024b 1 [SEED] [CONTRAST] [FIBROSIS] [MINM] [MAXM] [MINMRATIO] [MAXMRATIO] [MINRCRATIO] [MAXRCRATIO] [CT] [LIVER_MASK] ${CT}_bmode.png ${CT}_dict.json ${CT}_fibrosis_mask.jpg ${CT}_scat.mat ${CT}_normalized.png && tar -czvf [OUTPUT] ${CT}_bmode.png ${CT}_dict.json ${CT}_scat.mat ${CT}_normalized.png $(test -e ${CT}_fibrosis_mask.jpg && echo ${CT}_fibrosis_mask.jpg)",
     "container-image": {

@@ -24,7 +24,7 @@
             "-v /tmp:/tmp"
         ]
     },
-    "tool-version": "v7.3.1",
+    "tool-version": "7.3.1",
     "command-line": "export SUBJECTS_DIR=`pwd`; export FS_LICENSE=$PWD/[LICENSE_FILE]; recon-all -subjid [SUBJID] [NIFTI] [DIRECTIVES] [QCACHE] [MPRAGE] [3T] [CW256] [NOTAL-CHECK] [HYPPOCAMPAL-SUBFIELDS] [BRAINSTEM-STRUCTURES] [NO-WSGCAATLAS] [NO-SKULLSTRIP]; tar -czvf [RESULTS] [SUBJID]",
     "author": "Laboratory for Computational Neuroimaging ",
     "error-codes": [
