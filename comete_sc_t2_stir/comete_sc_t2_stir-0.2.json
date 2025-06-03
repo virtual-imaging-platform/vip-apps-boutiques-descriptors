@@ -7,7 +7,7 @@
   "schema-version": "0.5",
    "container-image":{
 	  "type": "docker",
-	  "image": "covid.creatis.insa-lyon.fr/vip-support/comete_sc_t2_stir:0.1"
+	  "image": "covid.creatis.insa-lyon.fr/vip-support/comete_sc_t2_stir:0.2"
   },
   "inputs": [{
       "id": "t2_archive",

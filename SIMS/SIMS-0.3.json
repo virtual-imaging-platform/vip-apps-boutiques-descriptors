@@ -7,7 +7,7 @@
   "schema-version": "0.5",
    "container-image":{
           "type": "docker",
-          "image": "covid.creatis.insa-lyon.fr/vip-support/SIMS:0.3"
+          "image": "covid.creatis.insa-lyon.fr/vip-support/sims:0.3"
   },
   "inputs": [{
       "id": "dicom_archive",

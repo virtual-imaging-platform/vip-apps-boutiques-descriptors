@@ -7,7 +7,7 @@
     "command-line": "unzip [DICOM_INPUT] -d INPUTDIR; mkdir OUTDIR; ln -s /app/model.pt model.pt; ln -s /app/segment_attributes.json segment_attributes.json; python /app/predict.py INPUTDIR OUTDIR && cp input_params.json OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR && rm -rf OUTDIR INPUTDIR model.pt segment_attributes.json; chmod -R 777 *",
     "container-image":{
       "type": "docker",
-      "image": "covid.creatis.insa-lyon.fr/vip-support/annotationInit:1.0"
+      "image": "covid.creatis.insa-lyon.fr/vip-support/annotationinit:1.0"
     },
     "inputs": [
     {
