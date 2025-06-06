@@ -1,1 +1,53 @@
-{"name":"MultiRegionalProstateSegmentation", "author":"Quibim S.L.", "description":"Multi-regional prostate segmentation from T2w image.", "tool-version":"1.0.0", "schema-version":"0.5", "command-line":"export PYTHONPATH=\"/app\"; python -m t2_prostate_segmentation [INPUT] -o [OUTPUT]; chmod a+w [OUTPUT]/*; cp [OUTPUT]/* ./", "container-image":{"image":"registry.gitlab.bsc.es/eucaim/docker-registry/t2_prostate_segmentation_eucaim:1.0.0", "type":"docker"}, "inputs":[{"name":"t2wfile", "id":"t2wfile", "description":"Input file path to T2w NIfTI.", "type":"File", "list":false, "optional":false, "command-line-flag":"-i", "value-key":"[INPUT]"},{"name":"resultsdir", "id":"resultsdir", "description":"Output directory to store the segmentation results.", "type":"String", "list":false, "optional":false, "value-key":"[OUTPUT]"}], "output-files":[{"name":"Segmentation mask", "id":"segmask", "description":"Segmentation mask resulting from the analysis.", "path-template":"[OUTPUT]/mask.nii.gz"},{"name":"Log file", "id":"logfile", "description":"Output log file.", "path-template":"[OUTPUT]/_output.log"},{"name":"Success file", "id":"successfile", "description":"File indicating succesful segmentation.", "path-template":"[OUTPUT]/_success.txt"}]}
+{
+  "name": "MultiRegionalProstateSegmentation",
+  "author": "Quibim S.L.",
+  "description": "Multi-regional prostate segmentation from T2w image.",
+  "tool-version": "1.0.0",
+  "schema-version": "0.5",
+  "command-line": "export PYTHONPATH=\"/app\"; python -m t2_prostate_segmentation [INPUT] -o [OUTPUT]; chmod a+w [OUTPUT]/*; cp [OUTPUT]/* ./",
+  "container-image": {
+    "image": "registry.gitlab.bsc.es/eucaim/docker-registry/t2_prostate_segmentation_eucaim:1.0.0",
+    "type": "docker"
+  },
+  "inputs": [
+    {
+      "name": "t2wfile",
+      "id": "t2wfile",
+      "description": "Input file path to T2w NIfTI.",
+      "type": "File",
+      "list": false,
+      "optional": false,
+      "command-line-flag": "-i",
+      "value-key": "[INPUT]"
+    },
+    {
+      "name": "resultsdir",
+      "id": "resultsdir",
+      "description": "Output directory to store the segmentation results.",
+      "type": "String",
+      "list": false,
+      "optional": false,
+      "value-key": "[OUTPUT]"
+    }
+  ],
+  "output-files": [
+    {
+      "name": "Segmentation mask",
+      "id": "segmask",
+      "description": "Segmentation mask resulting from the analysis.",
+      "path-template": "[OUTPUT]/mask.nii.gz"
+    },
+    {
+      "name": "Log file",
+      "id": "logfile",
+      "description": "Output log file.",
+      "path-template": "[OUTPUT]/_output.log"
+    },
+    {
+      "name": "Success file",
+      "id": "successfile",
+      "description": "File indicating succesful segmentation.",
+      "path-template": "[OUTPUT]/_success.txt"
+    }
+  ]
+}
