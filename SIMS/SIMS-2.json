@@ -1,0 +1,27 @@
+{
+  "name": "SIMS",
+  "tool-version": "2",
+  "author": "Ofsep",
+  "description": "ofsep_sequences_identification.<br />",
+  "command-line": "echo '--------------ls -l ../------------' && ls -l  && unzip [INPUT]; sed -i \"s#/TOUPDATE#$PWD#g\" input.json; bash /app/SIMS/run_identification.sh input.json output.json && cat output.json && mkdir output_folder && cp output.json output_folder && cp input_params.json output_folder/ && tar -cvzf [OUTPUT_FILE] output_folder",
+  "schema-version": "0.5",
+  "container-image":{
+    "type": "singularity",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/sims:2"
+  },
+  "inputs": [{
+    "id": "dicom_archive",
+    "name": "Dicom Archive",
+    "type": "File",
+    "description": "Dicom ZIP including json listing",
+    "value-key": "[INPUT]"
+  }
+  ],
+  "output-files": [{
+    "description" : "Tarball containing output.json. ",
+    "id" : "outarchive",
+    "name" : "Output archive",
+    "path-template": "[INPUT]_output.tgz",
+    "value-key": "[OUTPUT_FILE]"
+  }]
+}
