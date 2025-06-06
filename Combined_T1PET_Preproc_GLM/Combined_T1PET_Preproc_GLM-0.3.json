@@ -1,0 +1,204 @@
+{
+	"name": "Combined_T1PET_Preproc_GLM",
+	"tool-version": "0.3",
+	"description": "This function segments and normalizes the T1 and PET images. The user can also smooth the result. Then, this function also makes a statistical analysis of a MRI T1 file of a patient versus a list of controls based on the GLM (Generalized linear model). It uses the junction and extension map",
+	"command-line": "eval export MCR_CACHE_ROOT=/tmp; mkdir [OUT_FOLDER]_preT1; unzip [ATLAS_CREATIS]; unzip [STRING_CONTROLS_T1]; unzip [STRING_CONTROLS_PET]; run_full_process_T1.sh /usr/local/MATLAB/R2017b/mcr [STRING_3DT1] [OUT_FOLDER]_preT1 [STRING_REF] [MASK] [STRING_SMOOTH_T1] [SIZE_SMOOTH_T1] mean_junction.nii std_junction.nii mean_extension.nii std_extension.nii mean_thickness.nii std_thickness.nii; tar -czcf [OUT_FOLDER]_preprocT1.tar.gz [OUT_FOLDER]_preT1 ; mkdir [OUT_FOLDER]_glmT1 ;  run_GLM_T1.sh /usr/local/MATLAB/R2017b/mcr extension_control junction_control [OUT_FOLDER]_preT1/swc1_mask_stat_[STRING_3DT1] [OUT_FOLDER]_preT1/stat_binarymask_[STRING_3DT1] [MASK] [OUT_FOLDER]_glmT1 [THRESH_TYPE_T1] [THRESH_VALUE_T1]; tar -czcf [OUT_FOLDER]_glmT1.tar.gz [OUT_FOLDER]_glmT1 ; mkdir [OUT_FOLDER]_prePET; run_processing_fdg_T1.sh /usr/local/MATLAB/R2017b/mcr [STRING_3DT1] [STRING_PET] [OUT_FOLDER]_prePET [STRING_REF] [STRING_SMOOTH_PET] [SIZE_SMOOTH_PET]; tar -czcf [OUT_FOLDER]_preprocPET.tar.gz [OUT_FOLDER]_prePET ; mkdir [OUT_FOLDER]_glmPET ; run_GLM_PET_v2.sh /usr/local/MATLAB/R2017b/mcr control [OUT_FOLDER]_prePET/sw[STRING_PET] [MASK] [OUT_FOLDER]_glmPET [THRESH_TYPE_PET] [THRESH_VALUE_PET]; tar -czcf [OUT_FOLDER]_glmPET.tar.gz [OUT_FOLDER]_glmPET",
+	"schema-version": "0.5",
+	"container-image": {
+		"type": "docker",
+		"image": "covid.creatis.insa-lyon.fr/vip-support/glm:0.1",
+		"container-opts": [
+			"--ulimit nofile=65536:65536"
+		]
+	},
+	"author": "Carole Lartizien",
+	"inputs": [
+		{
+			"id": "T1_file",
+			"name": "T1 input file",
+			"type": "File",
+			"description": "Select the T1 file",
+			"optional": false,
+			"value-key": "[STRING_3DT1]",
+			"list": false
+		},
+		{
+			"id": "PET_file",
+			"name": "PET input file",
+			"type": "File",
+			"description": "Select the PET file",
+			"optional": false,
+			"value-key": "[STRING_PET]",
+			"list": false
+		},
+		{
+			"id": "out_folder",
+			"name": "Output folder name",
+			"type": "String",
+			"description": "Choose a name for your output folder",
+			"optional": false,
+			"value-key": "[OUT_FOLDER]",
+			"list": false
+		},
+		{
+			"id": "reference_image",
+			"name": "Reference image file",
+			"type": "File",
+			"description": "Select the reference image for the normalization",
+			"optional": false,
+			"value-key": "[STRING_REF]",
+			"list": false,
+			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/image_ID.nii"
+		},
+		{
+			"id": "mask_junction",
+			"name": "Junction mask",
+			"type": "File",
+			"description": "Select the junction mask for the normalization",
+			"optional": false,
+			"value-key": "[MASK]",
+			"list": false,
+			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/masque_junction.nii"
+		},
+		{
+			"id": "atlas_creatis",
+			"name": "Zipped Creatis Atlas files",
+			"type": "File",
+			"description": "Mean and Std of Junction, Extension and Thickness",
+			"optional": false,
+			"value-key": "[ATLAS_CREATIS]",
+			"list": false,
+			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/atlas_creatis.zip"
+		},
+		{
+			"id": "smoothing_option_t1",
+			"name": "smoothing option T1",
+			"type": "String",
+			"description": "Option for smoothing. Select true for smoothing.",
+			"optional": false,
+			"value-key": "[STRING_SMOOTH_T1]",
+			"list": false,
+			"default-value": "true"
+		},
+		{
+			"id": "smoothing_option_PET",
+			"name": "smoothing option PET",
+			"type": "String",
+			"description": "Option for smoothing. Select true for smoothing.",
+			"optional": false,
+			"value-key": "[STRING_SMOOTH_PET]",
+			"list": false,
+			"default-value": "true"
+		},
+		{
+			"id": "FWHM_number_T1",
+			"name": "FWHM of the T1 gaussian kernel",
+			"type": "String",
+			"description": "Specify  the  full-width  at half maximum (FWHM) of the Gaussian smoothing kernel in mm.",
+			"optional": false,
+			"value-key": "[SIZE_SMOOTH_T1]",
+			"list": false,
+			"default-value": "8"
+		},
+		{
+			"id": "FWHM_number_PET",
+			"name": "FWHM of the PET gaussian kernel",
+			"type": "String",
+			"description": "Specify  the  full-width  at half maximum (FWHM) of the Gaussian smoothing kernel in mm.",
+			"optional": false,
+			"value-key": "[SIZE_SMOOTH_PET]",
+			"list": false,
+			"default-value": "8"
+		},
+		{
+			"id": "control_folder_t1",
+			"name": "control folder T1",
+			"type": "File",
+			"description": "Select the folder containing the list of the junction and extension T1 controls ",
+			"optional": false,
+			"value-key": "[STRING_CONTROLS_T1]",
+			"list": false,
+			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/control_T1.zip"
+		},
+		{
+			"id": "control_folder_PET",
+			"name": "control folder PET",
+			"type": "File",
+			"description": "Select the folder containing the list of the PET controls which are already processed and smoothed",
+			"optional": false,
+			"value-key": "[STRING_CONTROLS_PET]",
+			"list": false,
+			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/control.zip"
+		},
+		{
+			"id": "threshold_type_t1",
+			"name": "Threshold type T1",
+			"type": "String",
+			"description": "Choose the type of threshold you want apply to your T1 study. The two choices are : none or FWE",
+			"optional": false,
+			"value-key": "[THRESH_TYPE_T1]",
+			"list": false,
+			"default-value": "none"
+		},
+		{
+			"id": "threshold_value_t1",
+			"name": "Threshold value T1",
+			"type": "String",
+			"description": "Choose the value corresponding to the threshold type. Basically for the threshold none the value is 0.001 and for FWE it is 0.05 ",
+			"optional": false,
+			"value-key": "[THRESH_VALUE_T1]",
+			"list": false,
+			"default-value": "0.001"
+		},
+		{
+			"id": "threshold_type_pet",
+			"name": "Threshold type PET",
+			"type": "String",
+			"description": "Choose the type of threshold you want apply to your PET study. The two choices are : none or FWE",
+			"optional": false,
+			"value-key": "[THRESH_TYPE_PET]",
+			"list": false,
+			"default-value": "none"
+		},
+		{
+			"id": "threshold_value_pet",
+			"name": "Threshold value PET",
+			"type": "String",
+			"description": "Choose the value corresponding to the threshold type. Basically for the threshold none the value is 0.001 and for FWE it is 0.05 ",
+			"optional": false,
+			"value-key": "[THRESH_VALUE_PET]",
+			"list": false,
+			"default-value": "0.001"
+		}
+	],
+	"output-files": [
+		{
+			"id": "preprocT1_output_archive",
+			"name": "Preprocessing T1 Output archive",
+			"description": "Preprocessing T1 Output archive",
+			"path-template": "[OUT_FOLDER]_preprocT1.tar.gz",
+			"optional": false
+		},
+		{
+			"id": "glmT1_output_archive",
+			"name": "GLM T1 Output archive",
+			"description": "GLM T1 Output archive",
+			"path-template": "[OUT_FOLDER]_glmT1.tar.gz",
+			"optional": false
+		},
+		{
+			"id": "preprocPET_output_archive",
+			"name": "Preprocessing PET Output archive",
+			"description": "Preprocessing PET Output archive",
+			"path-template": "[OUT_FOLDER]_preprocPET.tar.gz",
+			"optional": false
+		},
+		{
+			"id": "glmPET_output_archive",
+			"name": "GLM PET Output archive",
+			"description": "GLM PET Output archive",
+			"path-template": "[OUT_FOLDER]_glmPET.tar.gz",
+			"optional": false
+		}
+	]
+}

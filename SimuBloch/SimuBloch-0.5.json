@@ -1,0 +1,29 @@
+{
+  "name": "SimuBloch",
+  "author": "TODO",
+  "description": "TODO",
+  "tool-version": "0.5",
+  "schema-version": "0.5",
+  "command-line": "echo [TODO1] [TODO2]",
+  "container-image": {
+    "image": "covid.creatis.insa-lyon.fr/vip-support/simubloch:0.5",
+    "type": "docker"
+  },
+  "inputs": [
+    {
+      "name": "TODO1",
+      "id": "TODO1",
+      "description": "TODO1",
+      "type": "File",
+      "value-key": "[TODO1]"
+    }
+  ],
+  "output-files": [
+    {
+      "name": "TODO2",
+      "id": "TODO2",
+      "description": "TODO2",
+      "path-template": "TODO2"
+    }
+  ]
+}

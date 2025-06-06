@@ -1,1 +1,33 @@
-{"name":"mlvl_Inference", "tool-version":"0.2", "description":"Guideline: https://www.creatis.insa-lyon.fr/~phild/vip/vip.html", "author":"Pierre Erbacher, Philippe Delachartre", "command-line":"myPATH=$PWD; cp [DATA_INF] /mlvl/. ;cd /mlvl ;fbname=$(basename [DATA_INF] .mat); python Inference.py Unet0.h5 /mlvl/${fbname}.mat; cp ${fbname}_infer.nii $myPATH/[RESULTS]", "schema-version":"0.5", "container-image":{"type":"docker", "image":" pdelachartre/modelvltl:0.2", "index":"http://index.docker.io"}, "inputs":[{"id":"data_infer", "name":"Input data", "type":"File", "description":"use the magnifying glass to select the input data (3D cUS file with extension .mat) <br/>If the data are not available, you have to upload them with file transfer.", "optional":false, "value-key":"[DATA_INF]", "list":false}], "output-files":[{"id":"inference", "name":"Result of Inference", "path-template":"Resultat_Inference.nii", "description":"use the default directory home for a test otherwise create your own directory under home.", "value-key":"[RESULTS]", "optional":false}]}
+{
+  "name": "mlvl_Inference",
+  "tool-version": "0.2",
+  "description": "Guideline: https://www.creatis.insa-lyon.fr/~phild/vip/vip.html",
+  "author": "Pierre Erbacher, Philippe Delachartre",
+  "command-line": "myPATH=$PWD; cp [DATA_INF] /mlvl/. ;cd /mlvl ;fbname=$(basename [DATA_INF] .mat); python Inference.py Unet0.h5 /mlvl/${fbname}.mat; cp ${fbname}_infer.nii $myPATH/[RESULTS]",
+  "schema-version": "0.5",
+  "container-image": {
+    "type": "docker",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/modelvltl:0.2"
+  },
+  "inputs": [
+    {
+      "id": "data_infer",
+      "name": "Input data",
+      "type": "File",
+      "description": "use the magnifying glass to select the input data (3D cUS file with extension .mat) <br/>If the data are not available, you have to upload them with file transfer.",
+      "optional": false,
+      "value-key": "[DATA_INF]",
+      "list": false
+    }
+  ],
+  "output-files": [
+    {
+      "id": "inference",
+      "name": "Result of Inference",
+      "path-template": "Resultat_Inference.nii",
+      "description": "use the default directory home for a test otherwise create your own directory under home.",
+      "value-key": "[RESULTS]",
+      "optional": false
+    }
+  ]
+}

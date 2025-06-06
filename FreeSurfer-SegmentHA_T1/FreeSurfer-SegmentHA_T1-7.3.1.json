@@ -1,0 +1,50 @@
+{
+    "schema-version": "0.5",
+    "name": "FreeSurfer-SegmentHA_T1",
+    "container-image": {
+        "image": "docker.io/camarasu/freesurfer_mcr:7.3.1",
+        "type": "docker"
+    },
+    "tool-version": "7.3.1",
+    "command-line": "export SUBJECTS_DIR=`pwd` && export FS_LICENSE=$PWD/[LICENSE_FILE] && SUBJID=$(basename [INPUT] .tgz) && tar -zxvf  [INPUT] && segmentHA_T1.sh ${SUBJID} && tar -czvf [RESULTS] ${SUBJID}",
+    "author": "Laboratory for Computational Neuroimaging ",
+    "error-codes": [
+        {
+            "description": "Crashed",
+            "code": 1
+        }
+    ],
+    "inputs": [
+        {
+            "name": "License file",
+            "value-key": "[LICENSE_FILE]",
+            "optional": false,
+            "description": "Valid license file needed to run FreeSurfer.",
+            "id": "license",
+            "type": "File"
+        },
+        {
+            "name": "Input tarball",
+            "id": "in_tarball",
+            "optional": false,
+            "value-key": "[INPUT]",
+            "description": "INPUT tarball containing recon-all results",
+            "type": "File"
+        }
+    ],
+	"output-files": [
+        {
+            "name": "Output",
+            "optional": false,
+            "description": "The output tarball including results from segmentHA_T1",
+            "id": "out_tarball",
+            "path-template": "[INPUT]_segmentHA.tar.gz",
+			"path-template-stripped-extensions": [".tgz"],
+			"value-key":"[RESULTS]"
+        }
+    ],
+    "custom": {
+        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/freesurfer_mcr_7.3.1"
+    },
+    "description": "Performs all, or any part of, the FreeSurfer cortical reconstruction process (https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)."
+}
