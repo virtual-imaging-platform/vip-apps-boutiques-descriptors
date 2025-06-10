@@ -1,8 +1,8 @@
 {
-  "name": "longiseg4ms",
+  "name": "comete_brain_flair",
   "tool-version": "1.1",
   "author": "EMPENN",
-  "description": "longiseg4ms.<br />",
+  "description": "comete_brain_flair.<br />",
   "command-line": "cp -r /root/.anima $HOME/; UNET_INDIR=/data/nnunet/io; mkdir -p $UNET_INDIR; unzip [INPUT_FLAIR] -d $UNET_INDIR; UNET_OUTDIR=/data/nnunet/models/nnUNet/3d_fullres/Task205/nnUNetTrainerV2__nnUNetPlansv2.1; mkdir -p $UNET_OUTDIR; mkdir -p OUTDIR; (cd /longiseg && python3 predict.py -p $UNET_INDIR -tn Task205 -m flair -mn Task205_CS_FULL -f all -cs -o $UNET_OUTDIR) && cp -r $UNET_OUTDIR/Task205_CS_FULL OUTDIR && cp input_params.json OUTDIR/ && tar -cvzf [OUTPUT_FILE] OUTDIR",
   "schema-version": "0.5",
    "container-image":{
