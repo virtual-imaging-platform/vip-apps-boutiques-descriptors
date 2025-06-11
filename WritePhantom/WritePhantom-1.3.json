@@ -1,29 +1,50 @@
 {
   "name": "WritePhantom",
   "author": "TODO",
-  "description": "TODO",
+  "description": "-",
   "tool-version": "1.3",
   "schema-version": "0.5",
-  "command-line": "echo [TODO1] [TODO2]",
+  "command-line": "writePhantom.sh [FANTOMNAME] [T1] [T2] [DESCRIPTION]",
   "container-image": {
     "image": "covid.creatis.insa-lyon.fr/vip-support/writecoil:1.3",
     "type": "docker"
   },
   "inputs": [
     {
-      "name": "TODO1",
-      "id": "TODO1",
-      "description": "TODO1",
-      "type": "File",
-      "value-key": "[TODO1]"
+      "name": "fantomName",
+      "id": "fantomName",
+      "description": "Fantom name",
+      "type": "String",
+      "value-key": "[FANTOMNAME]"
+    },
+    {
+      "name": "description",
+      "id": "description",
+      "description": "1.25g NiSO4 x 6H2O, 5g NaCl /litre d'eau.",
+      "type": "String",
+      "value-key": "[DESCRIPTION]",
+      "optional": true
+    },
+    {
+      "name": "T2 (ms)",
+      "id": "t2",
+      "type": "String",
+      "value-key": "[T2]",
+      "optional": true
+    },
+    {
+      "name": "T1 (ms)",
+      "id": "t1",
+      "type": "String",
+      "value-key": "[T1]",
+      "optional": true
     }
   ],
   "output-files": [
     {
-      "name": "TODO2",
-      "id": "TODO2",
-      "description": "TODO2",
-      "path-template": "TODO2"
+      "name": "phantomFile",
+      "id": "phantomFile",
+      "path-template": "[FANTOMNAME].txt"
     }
   ]
 }

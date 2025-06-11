@@ -1,7 +1,7 @@
 {
   "name": "Simulator_For_Validation_Of_Deconvolution_Algorithms",
   "author": "TODO",
-  "description": "TODO",
+  "description": "-",
   "tool-version": "1.3",
   "schema-version": "0.5",
   "command-line": "export MATLAB_PREFDIR=/tmp; simulation.sh [PARAM] [SHAPE_MODEL] simulation; tar -czvf simulation_results_[SIMU_INDEX].tgz simulation_*",
