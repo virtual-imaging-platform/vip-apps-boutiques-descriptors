@@ -71,5 +71,8 @@
       "id": "coilFile",
       "path-template": "[COILNAME].txt"
     }
-  ]
+  ],
+  "custom": {
+    "vip:resultsDirectorySuffix":"coilCharact"
+  }
 }

@@ -46,5 +46,8 @@
       "id": "phantomFile",
       "path-template": "[FANTOMNAME].txt"
     }
-  ]
+  ],
+  "custom": {
+    "vip:resultsDirectorySuffix":"coilCharact"
+  }
 }
