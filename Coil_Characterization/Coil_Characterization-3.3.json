@@ -13,24 +13,24 @@
   "schema-version": "0.5",
   "inputs": [
     {
-      "id": "coil",
-      "name": "coil",
-      "type": "String",
-      "description": "coil",
+      "id": "Coil",
+      "name": "Coil",
+      "type": "File",
+      "description": "Txt file containing the coil description with one item per line (e.g. 31P_surf)",
       "value-key": "[COIL]"
     },
     {
-      "id": "fantom",
-      "name": "fantom",
-      "type": "String",
-      "description": "fantom",
+      "id": "Phantom",
+      "name": "Phantom",
+      "type": "File",
+      "description": "Txt file containing the coil description with one item per line (e.g. 1.25g NiSO4 x 6H2O, 5g NaCl /litre d eau)",
       "value-key": "[FANTOM]"
     },
     {
-      "id": "data",
-      "name": "data",
-      "type": "String",
-      "description": "data",
+      "id": "Data",
+      "name": "Data",
+      "type": "File",
+      "description": "Tarball containing all data images to be processed",
       "value-key": "[DATA]"
     }
   ],
@@ -38,9 +38,12 @@
     {
       "id": "reportFile",
       "name": "reportFile",
-      "description": "reportFile",
-      "path-template": "reportFile",
-      "optional": true
+      "path-template": "reportFile/*.pdf"
+    },
+    {
+      "id": "comparison",
+      "name": "comparison",
+      "path-template": "comparison/*.mat"
     }
   ]
 }
