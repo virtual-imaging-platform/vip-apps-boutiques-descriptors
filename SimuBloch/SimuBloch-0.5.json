@@ -4,9 +4,9 @@
   "description": "This application wraps the MRI simulator SimuBloch developed at INRIA / IRISA / INSERM - VisAGeS Team. Detailed documentation is available &lt;a href=\"http://vip.creatis.insa-lyon.fr/documentation/simubloch-guide.pdf\"&gt;here&lt;/a&gt;.",
   "tool-version": "0.5",
   "schema-version": "0.5",
-  "command-line": "SimuBloch.sh [T1] [T2] [M0] [TR] [TE]",
+  "command-line": "SimuBloch.sh [T1] [T2] [M0] [TR] [TE] [OUTFILE]",
   "container-image": {
-    "image": "covid.creatis.insa-lyon.fr/vip-support/simubloch:0.5",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/simubloch:0.4",
     "type": "docker"
   },
   "inputs": [
@@ -50,7 +50,8 @@
     {
       "name": "result",
       "id": "result",
-      "path-template": "[T1]-[T2]-[M0]-[TR]-[TE]-simu.nii.gz"
+      "path-template": "[T1]-[TR]-[TE]-simu.nii.gz",
+      "value-key": "[OUTFILE]"
     }
   ]
 }
