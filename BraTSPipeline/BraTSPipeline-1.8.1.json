@@ -4,7 +4,7 @@
   "command-line": "/opt/captk/1.8.1/usr/bin/BraTSPipeline [T1C] [T1] [T2] [Fl] -o [OD] [SK] [BT] [PI]; ls -la [OD]; if [ [ALLRESULTS] != 1 ]; then tar -czvf [RESULTS] ./[OD]/*brainTumorMask_SRI.nii.gz ./[OD]/*T1_to_SRI_brain.nii.gz; else tar -czvf [RESULTS] [OD]; fi",
   "author": "Sorina Pop",
   "container-image": {
-    "image": "docker.io/cbica/captk:release-1.8.1",
+    "image": "docker.io/cbica/captk:2021.03.29",
     "type": "docker"
   },
   "inputs": [
@@ -106,6 +106,7 @@
         0,
         1
       ],
+      "integer": true,
       "id": "bundleAllResults",
       "name": "bundleAllResults"
     }
