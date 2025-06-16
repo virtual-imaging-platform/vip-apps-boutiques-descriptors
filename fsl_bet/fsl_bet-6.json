@@ -1,5 +1,5 @@
 {
-    "name": "fsl_bet-full",
+    "name": "fsl_bet",
     "tool-version": "6",
     "author": "Sandesh PATIL",
     "description": "This application launches the bet (Brain Extraction tool) tool from the <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSL\">FSL</a> software(v6).<br />Documentation on the bet function can be found <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET/UserGuide\">here</a>. <br /> You must respect its <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Licence\">software license</a>",

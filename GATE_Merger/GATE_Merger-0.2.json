@@ -1,6 +1,6 @@
 {
     "schema-version": "0.5",
-    "name": "GATEresultsMerger",
+    "name": "GATE_Merger",
     "container-image": {
         "image": "docker.io/camarasu/merge:0.2",
         "type": "docker"
