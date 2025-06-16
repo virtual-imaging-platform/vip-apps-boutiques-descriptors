@@ -6,7 +6,7 @@
   "schema-version": "0.5",
   "command-line": "SimuBloch.sh [T1] [T2] [M0] [TR] [TE] [OUTFILE]",
   "container-image": {
-    "image": "covid.creatis.insa-lyon.fr/vip-support/simubloch:0.4",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/simubloch:0.5",
     "type": "docker"
   },
   "inputs": [
