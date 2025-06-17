@@ -6,7 +6,7 @@
         "type": "docker"
     },
     "tool-version": "0.2",
-    "command-line": "OUTFOLDER=$(basename [RESULTSPATH]) && mv [INPUT] $OUTFOLDER && /merge/merge_docker.sh [OUTPUT] $OUTFOLDER",
+    "command-line": "OUTFOLDER=$(basename [RESULTSPATH]) && cp [INPUT] $OUTFOLDER && /merge/merge_docker.sh [OUTPUT] $OUTFOLDER",
     "author": "CREATIS lab",
     "error-codes": [
         {
