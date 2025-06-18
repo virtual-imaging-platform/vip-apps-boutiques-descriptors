@@ -223,7 +223,6 @@
     "description": "General pipeline for processing anatomical images (e.g. T1-weighted scans) via FSL tools. The stages include reorienting the images to the standard (MNI) orientation [fslreorient2std], automatically cropping the image [robustfov], bias-field correction (RF/B1-inhomogeneity-correction) [FAST], registration to standard space (linear and non-linear) [FLIRT and FNIRT], brain-extraction [FNIRT-based or BET], tissue-type segmentation [FAST], and subcortical structure segmentation [FIRST]"
 	,
     "custom": {
-        "vip:dot": ["infile","outdir"],
-        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/fsl_6.0.5_fuzzy"
+        "vip:dot": ["infile","outdir"]
     }
 }

@@ -53,7 +53,8 @@
         }
     ],
     "custom": {
-        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/gate-vip:9.4.1"
+      "vip:intIteratorInputs": ["jobNumber"],
+      "vip:overriddenInputs": {"jobNumber":"numberOfJobs"}
     },
     "description": "This application runs GATE on the EGI eInfrastructure. The documentation entry point is available <a href=\"http://www.opengatecollaboration.org/gatelab\">here</a>."
 }

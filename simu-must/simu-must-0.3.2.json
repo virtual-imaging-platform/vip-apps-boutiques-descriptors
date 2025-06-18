@@ -80,6 +80,7 @@
             "value-key": "[OUTNAME]"
         }
     ],
-	"custom": {"vip:dot": ["patient_file", "polar_file", "mesh_file"],
-	"vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/simu-must-v0.3.2"}
+	"custom": {
+    "vip:dot": ["patient_file", "polar_file", "mesh_file"]
+  }
 }

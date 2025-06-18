@@ -42,9 +42,5 @@
 			"value-key":"[OUTPUT]"
         }
     ],
-    "custom": {
-        "vip:imagepath": "/cvmfs/biomed.egi.eu/vip/singularity/merge-0.2",
-		"vip:directory": "gate_out_folder"
-    },
     "description": "Merges partial results produced by GATE jobs."
 }
