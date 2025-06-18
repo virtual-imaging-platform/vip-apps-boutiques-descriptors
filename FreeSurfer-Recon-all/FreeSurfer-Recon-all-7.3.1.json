@@ -156,7 +156,8 @@
     ],
     "custom": {
         "cbrain:author": "Natacha Beck <natacha.beck@mcgill.ca>",
-        "cbrain:readonly-input-files": true
+        "cbrain:readonly-input-files": true,
+        "vip:directoryInputs":{"nifti":{"patterns":["*.nii","*.nii.gz"]}}
     },
     "description": "Performs all, or any part of, the FreeSurfer cortical reconstruction process (https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)."
 }
