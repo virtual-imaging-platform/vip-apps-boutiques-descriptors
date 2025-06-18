@@ -48,7 +48,7 @@
 			"optional": false,
 			"value-key": "[STRING_REF]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/image_ID.nii"
+			"default-value": "/vip/CAD Neuro (group)/data/image_ID.nii"
 		},
 		{
 			"id": "smoothing_option",
@@ -78,7 +78,7 @@
 			"optional": false,
 			"value-key": "[MASK_FILE]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/masque_junction.nii"
+			"default-value": "/vip/CAD Neuro (group)/data/masque_junction.nii"
 		},
 		{
 			"id": "control_folder_PET",
@@ -88,7 +88,7 @@
 			"optional": false,
 			"value-key": "[STRING_CONTROLS_PET]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/control.zip"
+			"default-value": "/vip/CAD Neuro (group)/data/control.zip"
 		},
 		{
 			"id": "threshold_type",

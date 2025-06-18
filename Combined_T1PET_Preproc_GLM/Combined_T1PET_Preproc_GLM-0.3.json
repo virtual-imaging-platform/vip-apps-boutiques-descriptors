@@ -48,7 +48,7 @@
 			"optional": false,
 			"value-key": "[STRING_REF]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/image_ID.nii"
+			"default-value": "/vip/CAD Neuro (group)/data/image_ID.nii"
 		},
 		{
 			"id": "mask_junction",
@@ -58,7 +58,7 @@
 			"optional": false,
 			"value-key": "[MASK]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/masque_junction.nii"
+			"default-value": "/vip/CAD Neuro (group)/data/masque_junction.nii"
 		},
 		{
 			"id": "atlas_creatis",
@@ -68,7 +68,7 @@
 			"optional": false,
 			"value-key": "[ATLAS_CREATIS]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/atlas_creatis.zip"
+			"default-value": "/vip/CAD Neuro (group)/data/atlas_creatis.zip"
 		},
 		{
 			"id": "smoothing_option_t1",
@@ -118,7 +118,7 @@
 			"optional": false,
 			"value-key": "[STRING_CONTROLS_T1]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/control_T1.zip"
+			"default-value": "/vip/CAD Neuro (group)/data/control_T1.zip"
 		},
 		{
 			"id": "control_folder_PET",
@@ -128,7 +128,7 @@
 			"optional": false,
 			"value-key": "[STRING_CONTROLS_PET]",
 			"list": false,
-			"default-value": "/biomed/user/c/creatis/vip/data/groups/CAD_Neuro/data/control.zip"
+			"default-value": "/vip/CAD Neuro (group)/data/control.zip"
 		},
 		{
 			"id": "threshold_type_t1",
