@@ -1,0 +1,42 @@
+{
+  "name": "Simulator_For_Validation_Of_Deconvolution_Algorithms",
+  "author": "VIP team",
+  "description": "-",
+  "tool-version": "1.3",
+  "schema-version": "0.5",
+  "command-line": "export MATLAB_PREFDIR=/tmp; simulation.sh [PARAM] [SHAPE_MODEL] simulation; tar -czvf simulation_results_[SIMU_INDEX].tgz simulation_*",
+  "container-image": {
+    "type": "docker",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/deconvsimulator:1.1"
+  },
+  "inputs": [
+    {
+      "name": "important_parameters",
+      "id": "important_parameters",
+      "description": "The input parameters should be all given in a single textfile. Use “SimulationParameters000.txt” as an example. The simulation parameters text file should contain all the following input parameters: IRFmodel, muCBF, sigmaCBF, lbCBF, ubCBF, muMTT, sigmaMTT, lbMTT, ubMTT , ymax, tmax, d, alphaAIF, T, dt and snr. There should be one line per parameter and each line should contain the parameter name followed by a tabulation then by the parameter value(s) . For muCBF, sigmaCBF, lbCBF, ubCBF, muMTT, sigmaMTT, lbMTT and ubMTT, where there is one parameter value per tissue class, the parameter values for each tissue class should be separated by a tabulation.",
+      "type": "File",
+      "value-key": "[PARAM]"
+    },
+    {
+      "name": "shape_model",
+      "id": "shape_model",
+      "type": "File",
+      "description": "The shape model is a 2D or 3D labelled image of the different tissue class (one label per tissue class). The labels should be integers, with the smaller label 0 or 1 and the other labels increasing 1 by 1. If there are background voxels their label should be zero. The shape model should be given in the nii format with dimension order : XYZ.",
+      "value-key": "[SHAPE_MODEL]"
+    },
+    {
+      "name": "simulation_index",
+      "id": "simulation_index",
+      "type": "String",
+      "description": "Use 1 for a single simulation for each of the above parameters. Use a parameter range if you want multiple simulations, e.g. from 1 to 10 with a step of 1. The output tarball will be named according to the used index.",
+      "value-key": "[SIMU_INDEX]"
+    }
+  ],
+  "output-files": [
+    {
+      "name": "simu_results",
+      "id": "simu_results",
+      "path-template": "simulation_results_[SIMU_INDEX].tgz"
+    }
+  ]
+}

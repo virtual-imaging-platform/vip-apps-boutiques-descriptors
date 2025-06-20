@@ -1,0 +1,49 @@
+{
+  "name": "Coil Characterization",
+  "tool-version": "3.3",
+  "description": "Coil Characterization",
+  "command-line": "caract_inside.sh [COIL] [FANTOM] [DATA]",
+  "container-image": {
+    "type": "docker",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/coil-caract:3.3",
+    "container-opts": [
+      "--ulimit nofile=65536:65536"
+    ]
+  },
+  "schema-version": "0.5",
+  "inputs": [
+    {
+      "id": "Coil",
+      "name": "Coil",
+      "type": "File",
+      "description": "Txt file containing the coil description with one item per line (e.g. 31P_surf)",
+      "value-key": "[COIL]"
+    },
+    {
+      "id": "Phantom",
+      "name": "Phantom",
+      "type": "File",
+      "description": "Txt file containing the coil description with one item per line (e.g. 1.25g NiSO4 x 6H2O, 5g NaCl /litre d eau)",
+      "value-key": "[FANTOM]"
+    },
+    {
+      "id": "Data",
+      "name": "Data",
+      "type": "File",
+      "description": "Tarball containing all data images to be processed",
+      "value-key": "[DATA]"
+    }
+  ],
+  "output-files": [
+    {
+      "id": "reportFile",
+      "name": "reportFile",
+      "path-template": "reportFile/*.pdf"
+    },
+    {
+      "id": "comparison",
+      "name": "comparison",
+      "path-template": "comparison/*.mat"
+    }
+  ]
+}
