@@ -1,0 +1,130 @@
+{
+	"name": "PET_Preproc_GLM",
+	"tool-version": "0.3",
+	"description": "This function segments and normalizes the T1 and the PET images. The user can also smooth the result. Then this function also makes a statistical analysis of a PET file of a patient versus a list of controls based on the GLM (Generalized linear model)",
+	"command-line": "eval export MCR_CACHE_ROOT=/tmp; unzip [STRING_CONTROLS_PET]; mkdir [OUT_FOLDER]; run_processing_fdg_T1.sh /usr/local/MATLAB/R2017b/mcr [STRING_3DT1] [STRING_PET] [OUT_FOLDER] [STRING_REF] [STRING_SMOOTH] [SIZE_SMOOTH]; tar -czcf [OUT_FOLDER]_preproc.tar.gz [OUT_FOLDER] ; mkdir [OUT_FOLDER]_glm ; run_GLM_PET_v2.sh /usr/local/MATLAB/R2017b/mcr control [OUT_FOLDER]/sw[STRING_PET] [MASK_FILE] [OUT_FOLDER]_glm [THRESH_TYPE] [THRESH_VALUE]; tar -czcf [OUT_FOLDER]_glm.tar.gz [OUT_FOLDER]_glm ",
+	"schema-version": "0.5",
+	"container-image": {
+		"type": "docker",
+		"image": "covid.creatis.insa-lyon.fr/vip-support/glm:0.1",
+		"container-opts": [
+			"--ulimit nofile=65536:65536"
+		]
+	},
+	"author": "Carole Lartizien",
+	"inputs": [
+		{
+			"id": "T1_file",
+			"name": "T1 input file",
+			"type": "File",
+			"description": "Select the T1 file",
+			"optional": false,
+			"value-key": "[STRING_3DT1]",
+			"list": false
+		},
+		{
+			"id": "PET_file",
+			"name": "PET input file",
+			"type": "File",
+			"description": "Select the PET file",
+			"optional": false,
+			"value-key": "[STRING_PET]",
+			"list": false
+		},
+		{
+			"id": "out_folder",
+			"name": "Output folder name",
+			"type": "String",
+			"description": "Choose a name for your output folder",
+			"optional": false,
+			"value-key": "[OUT_FOLDER]",
+			"list": false
+		},
+		{
+			"id": "reference_image",
+			"name": "Reference image file",
+			"type": "File",
+			"description": "Select the reference image for the normalization",
+			"optional": false,
+			"value-key": "[STRING_REF]",
+			"list": false,
+			"default-value": "/vip/CAD Neuro (group)/data/image_ID.nii"
+		},
+		{
+			"id": "smoothing_option",
+			"name": "smoothing option",
+			"type": "String",
+			"description": "Option for smoothing. Select true for smoothing.",
+			"optional": false,
+			"value-key": "[STRING_SMOOTH]",
+			"list": false,
+			"default-value": "true"
+		},
+		{
+			"id": "FWHM_number",
+			"name": "FWHM of the gaussian kernel",
+			"type": "String",
+			"description": "Specify  the  full-width  at half maximum (FWHM) of the Gaussian smoothing kernel in mm.",
+			"optional": false,
+			"value-key": "[SIZE_SMOOTH]",
+			"list": false,
+			"default-value": "8"
+		},
+		{
+			"id": "mask_file",
+			"name": "Reference mask file",
+			"type": "File",
+			"description": "Select the reference mask",
+			"optional": false,
+			"value-key": "[MASK_FILE]",
+			"list": false,
+			"default-value": "/vip/CAD Neuro (group)/data/masque_junction.nii"
+		},
+		{
+			"id": "control_folder_PET",
+			"name": "control folder PET",
+			"type": "File",
+			"description": "Select the folder containing the list of the PET controls which are already processed and smoothed",
+			"optional": false,
+			"value-key": "[STRING_CONTROLS_PET]",
+			"list": false,
+			"default-value": "/vip/CAD Neuro (group)/data/control.zip"
+		},
+		{
+			"id": "threshold_type",
+			"name": "Threshold type",
+			"type": "String",
+			"description": "Choose the type of threshold you want apply to your study. The two choices are : none or FWE",
+			"optional": false,
+			"value-key": "[THRESH_TYPE]",
+			"list": false,
+			"default-value": "none"
+		},
+		{
+			"id": "threshold_value",
+			"name": "Threshold value",
+			"type": "String",
+			"description": "Choose the value corresponding to the threshold type. Basically for the threshold none the value is 0.001 and for FWE it is 0.05 ",
+			"optional": false,
+			"value-key": "[THRESH_VALUE]",
+			"list": false,
+			"default-value": "0.001"
+		}
+	],
+	"output-files": [
+		{
+			"id": "preproc_output_archive",
+			"name": "Preprocessing Output archive",
+			"description": "Preprocessing Output archive",
+			"path-template": "[OUT_FOLDER]_preproc.tar.gz",
+			"optional": false
+		},
+		{
+			"id": "glm_output_archive",
+			"name": "GLM Output archive",
+			"description": "GLM Output archive",
+			"path-template": "[OUT_FOLDER]_glm.tar.gz",
+			"optional": false
+		}
+	]
+}

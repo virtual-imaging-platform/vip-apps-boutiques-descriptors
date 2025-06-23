@@ -1,0 +1,45 @@
+{
+	"name":"3D_simulation",
+	"tool-version":"0.1",
+	"description":"3D chromatin super resolution image simulation of a single cell", "author":"Ali AHMAD, David ROUSSEAU and Carole FRINDEL",
+	"command-line":"eval export MCR_CACHE_ROOT=/tmp; tar -zxvf [STRING_CONTROLS]; run_Simulation3D.sh /usr/local/MATLAB/MATLAB_Runtime/v95 [DIST] [LP]; tar -czcf [RESULTS] *.png *.tif",
+	"container-image":{
+		"type": "docker",
+		"image": "covid.creatis.insa-lyon.fr/vip-support/3d_simulation:0.1"
+	},
+	"schema-version":"0.5",
+	"inputs":[{
+		"id":"mat_files",
+		"name":"mat files",
+		"type":"File",
+		"description":"Select the archive containing the input mat files",
+		"optional":false,
+		"value-key":"[STRING_CONTROLS]",
+		"list":false,
+		"default-value":"/vip/Diffusion-Perfusion (group)/data/mat_files.tgz"
+	},{
+		"id":"uniform_dist_parameter",
+		"name":"Marker density",
+		"type":"String",
+		"description":"Marker density (real number: >= 30)",
+		"optional":false,
+		"value-key":"[DIST]",
+		"list":false,
+		"default-value":"100"
+	},{
+		"id":"LP",
+		"name":"Chromatin chain density",
+		"type":"String",
+		"description":"Chromatin chain density (real number: <= 5)",
+		"optional":false,
+		"value-key":"[LP]",
+		"list":false,
+		"default-value":"1"
+	}],
+	"output-files":[{
+		"id":"output_archive",
+		"name":"Output archive",
+		"description":"Output archive",
+		"path-template":"output_dist[DIST]_lp[LP].tar.gz",
+		"value-key":"[RESULTS]",
+		"optional":false}]}

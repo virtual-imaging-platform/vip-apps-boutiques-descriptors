@@ -1,0 +1,86 @@
+{
+  "name": "DeconvolutionPerfusion",
+  "author": "VIP team",
+  "description": "-",
+  "tool-version": "1.1",
+  "schema-version": "0.5",
+  "command-line": "export MATLAB_PREFDIR=/tmp; deconvolution.sh [IMAGE_TO] [ARTERIAL_ENTRY] [LAMBDAT] [LAMBDAS] [LAMBDAP] [DELTA] deconvolution",
+  "container-image": {
+    "type": "docker",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/deconvperf:1.1",
+    "container-opts": [
+      "--ulimit nofile=65536:65536"
+    ]
+  },
+  "inputs": [
+    {
+      "name": "image_to_deconvolve",
+      "id": "image_to_deconvolve",
+      "description": "Image to deconvolve",
+      "type": "File",
+      "value-key": "[IMAGE_TO]"
+    },
+    {
+      "name": "arterial_entry",
+      "id": "arterial_entry",
+      "description": "File for arterial entry",
+      "type": "File",
+      "value-key": "[ARTERIAL_ENTRY]"
+    },
+    {
+      "name": "lambda_t",
+      "id": "lambda_t",
+      "description": "Temporal regularisation",
+      "type": "Number",
+      "value-key": "[LAMBDAT]"
+    },
+    {
+      "name": "lambda_s",
+      "id": "lambda_s",
+      "description": "Spatial regularisation",
+      "type": "Number",
+      "value-key": "[LAMBDAS]"
+    },
+    {
+      "name": "lambda_p",
+      "id": "lambda_p",
+      "description": "No negativity constraint",
+      "type": "Number",
+      "value-key": "[LAMBDAP]"
+    },
+    {
+      "name": "delta",
+      "id": "delta",
+      "description": "Scaling parameter for gradient",
+      "type": "Number",
+      "value-key": "[DELTA]"
+    }
+  ],
+  "output-files": [
+    {
+      "name": "impulse_image",
+      "id": "impulse_image",
+      "path-template": "deconvolution_Ideconv.nii"
+    },
+    {
+      "name": "smean_transit_map",
+      "id": "seman_transit_map",
+      "path-template": "deconvolution_MTT.nii"
+    },
+    {
+      "name": "cbv_map",
+      "id": "cbv_map",
+      "path-template": "deconvolution_CBV.nii"
+    },
+    {
+      "name": "cbf_map",
+      "id": "cbf_map",
+      "path-template": "deconvolution_CBF.nii"
+    },
+    {
+      "name": "time_peak_map",
+      "id": "time_peak_map",
+      "path-template": "deconvolution_Tmax.nii"
+    }
+  ]
+}
