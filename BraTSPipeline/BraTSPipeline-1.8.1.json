@@ -122,5 +122,8 @@
       "name": "Output archive"
     }
   ],
+  "custom": {
+    "vip:dot": ["flImage","t1Image","t1ceImage","t2Image","appliOutputDir"]
+  },
   "description": "Contact: software@cbica.upenn.edu. Copyright  (c) 2022 University of Pennsylvania. All rights reserved. See https://www.med.upenn.edu/cbica/software-agreement.html"
 }

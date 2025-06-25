@@ -122,5 +122,8 @@
       "value-key": "[RESULTS]",
       "optional": false
     }
-  ]
+  ],
+  "custom": {
+    "vip:dot": ["flImage","t1Image","t1ceImage","t2Image","appliOutputDir"]
+  }
 }

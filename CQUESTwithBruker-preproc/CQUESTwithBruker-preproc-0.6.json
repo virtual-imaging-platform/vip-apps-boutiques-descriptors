@@ -212,7 +212,7 @@
     }
   ],
   "custom": {
-    "vip:dotInputs": [
+    "vip:dot": [
       "results-directory",
       "fid",
       "acqp",

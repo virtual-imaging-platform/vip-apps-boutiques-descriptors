@@ -53,5 +53,8 @@
       "path-template": "[T1]-[TR]-[TE]-simu.nii.gz",
       "value-key": "[OUTFILE]"
     }
-  ]
+  ],
+	"custom": {
+    "vip:dot": ["T1","T2","M0"]
+  }
 }
