@@ -93,7 +93,7 @@
       "command-line-flag": "-p",
       "type": "String",
       "description": "Patient ID to pre-pend to final output file names. If empty, final output is of the form ${modality}_to_SRI.nii.gz",
-      "optional": true,
+      "optional": false,
       "value-key": "[PI]",
       "list": false
     },
@@ -124,6 +124,6 @@
     }
   ],
   "custom": {
-    "vip:dot": ["flImage","t1Image","t1ceImage","t2Image","appliOutputDir"]
+    "vip:dot": ["flImage","t1Image","t1ceImage","t2Image","appliOutputDir","patientID"]
   }
 }
