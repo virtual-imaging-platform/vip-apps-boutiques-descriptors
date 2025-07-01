@@ -4,7 +4,7 @@
   "description": "Generate a phantom txt file for Coil Characterization",
   "tool-version": "1.3",
   "schema-version": "0.5",
-  "command-line": "writePhantom.sh [FANTOMNAME] [T1] [T2] [DESCRIPTION]",
+  "command-line": "writePhantom.sh [T1] [T2] [DESCRIPTION] [FANTOMNAME]",
   "container-image": {
     "image": "covid.creatis.insa-lyon.fr/vip-support/writecoil:1.3",
     "type": "docker"
@@ -23,6 +23,7 @@
       "description": "1.25g NiSO4 x 6H2O, 5g NaCl /litre d'eau.",
       "type": "String",
       "value-key": "[DESCRIPTION]",
+      "command-line-flag": "--description",
       "optional": true
     },
     {
@@ -30,6 +31,7 @@
       "id": "t2",
       "type": "String",
       "value-key": "[T2]",
+      "command-line-flag": "--t2",
       "optional": true
     },
     {
@@ -37,6 +39,7 @@
       "id": "t1",
       "type": "String",
       "value-key": "[T1]",
+      "command-line-flag": "--t1",
       "optional": true
     }
   ],

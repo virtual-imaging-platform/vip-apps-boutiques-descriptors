@@ -4,7 +4,7 @@
   "description": "Generate a coil txt file for Coil Characterization",
   "tool-version": "1.3",
   "schema-version": "0.5",
-  "command-line": "writeCoil.sh [COILNAME] [GEOMETRY] [ACTIVEELEMENTS] [CONSTRUCTOR] [MODEL] [UNCERTAINTY] [SERIALNUMBER]",
+  "command-line": "writeCoil.sh [ACTIVEELEMENTS] [CONSTRUCTOR] [MODEL] [UNCERTAINTY] [SERIALNUMBER] [COILNAME] [GEOMETRY]",
   "container-image": {
     "image": "covid.creatis.insa-lyon.fr/vip-support/writecoil:1.3",
     "type": "docker"
@@ -30,6 +30,7 @@
       "description": "Only for an array coil. Fill-in 1 for a single channel coil or a quadrature coil.",
       "type": "String",
       "value-key": "[ACTIVEELEMENTS]",
+      "command-line-flag": "--numberOfActiveElements",
       "optional": true
     },
     {
@@ -38,6 +39,7 @@
       "description": "Constructor name.",
       "type": "String",
       "value-key": "[CONSTRUCTOR]",
+      "command-line-flag": "--constructor",
       "optional": true
     },
     {
@@ -46,6 +48,7 @@
       "description": "Fill-in \"Tx/Rx\" for a transmission and reception mode or \"Rx\" if the coil operates only in reception mode.",
       "type": "String",
       "value-key": "[MODEL]",
+      "command-line-flag": "--operatingMode",
       "optional": true
     },
     {
@@ -54,6 +57,7 @@
       "description": "The uncertainty (in %) of the SNR measurement. By default, this value is set to 5% for volume coils and 10% for surface coils.",
       "type": "String",
       "value-key": "[UNCERTAINTY]",
+      "command-line-flag": "--uncertainty",
       "optional": true
     },
     {
@@ -62,6 +66,7 @@
       "description": "Serial Number",
       "type": "String",
       "value-key": "[SERIALNUMBER]",
+      "command-line-flag": "--serialNumber",
       "optional": true
     }
   ],
