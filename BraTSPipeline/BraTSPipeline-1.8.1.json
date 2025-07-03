@@ -1,6 +1,7 @@
 {
   "tool-version": "1.8.1",
   "name": "BraTSPipeline",
+  "description": "This corresponds to the captk build labelled \"cbica/captk:2021.03.29\" on dockerhub that is a 1.8.1 build with a necessary patch to include BratsPipeline (which was not included in the 1.8.1 label dockerhub).<br />Contact: software@cbica.upenn.edu. Copyright  (c) 2022 University of Pennsylvania. All rights reserved. See https://www.med.upenn.edu/cbica/software-agreement.html",
   "command-line": "/opt/captk/1.8.1/usr/bin/BraTSPipeline [T1C] [T1] [T2] [Fl] -o [OD] [SK] [BT] [PI]; ls -la [OD]; if [ [ALLRESULTS] != 1 ]; then tar -czvf [RESULTS] ./[OD]/*brainTumorMask_SRI.nii.gz ./[OD]/*T1_to_SRI_brain.nii.gz; else tar -czvf [RESULTS] [OD]; fi",
   "author": "Sorina Pop",
   "container-image": {
@@ -124,6 +125,5 @@
   ],
   "custom": {
     "vip:dot": ["flImage","t1Image","t1ceImage","t2Image","appliOutputDir","patientID"]
-  },
-  "description": "Contact: software@cbica.upenn.edu. Copyright  (c) 2022 University of Pennsylvania. All rights reserved. See https://www.med.upenn.edu/cbica/software-agreement.html"
+  }
 }
