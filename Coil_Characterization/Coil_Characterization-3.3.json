@@ -2,6 +2,7 @@
   "name": "Coil Characterization",
   "tool-version": "3.3",
   "description": "Coil Characterization",
+  "author": "VIP team",
   "command-line": "if ! test \"$(basename [COIL] .txt)\" = \"$(head -1 [COIL])\"; then echo \"Invalid coil input: name mismatch\"; exit 1; fi && if test \"$(basename [COMPARISON])\" != comparison; then ln -sfT [COMPARISON] comparison; fi && echo \"before exec:\" && ls -l comparison/ && touch _start && caract_inside.sh [COIL] [FANTOM] [DATA] && echo \"after exec:\" && ls -l comparison/ reportFile/ && OUTPUTS=\"$(find comparison/ -newer _start -name [OUTPUT_MAT]) $(find reportFile/ -newer _start -name [OUTPUT_PDF])\" && echo \"found outputs: $OUTPUTS\" && cp $OUTPUTS ./",
   "container-image": {
     "type": "docker",
