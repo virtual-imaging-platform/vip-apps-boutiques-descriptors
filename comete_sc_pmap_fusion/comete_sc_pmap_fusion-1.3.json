@@ -3,7 +3,7 @@
   "tool-version": "1.3",
   "author": "INRIA",
   "description": "Tool dedicated to fuse images and pmaps and get metrics from these pmaps<br />",
-  "command-line": "export PATH=:/sct/spinalcordtoolbox/bin:$PATH ;  unzip [PMAP_ARCHIVE] -d input_pmap; unzip [T2_ARCHIVE] -d input_t2; mkdir OUTDIR; python3 /comete_sc_pmap_fusion/main.py -pmap input_pmap/pmap -t2 input_t2/t2 -output OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR",
+  "command-line": "export PATH=:/sct/spinalcordtoolbox/bin:$PATH ;  unzip [PMAP_ARCHIVE] -d input_pmap; mkdir input_pmap/pmap; mv input_pmap/*/* input_pmap/pmap; echo 'ARCHIVE PMAP :'; ls input_pmap/pmap;  unzip [T2_ARCHIVE] -d input_t2; mkdir input_t2/t2; mv input_t2/* ./input_t2/t2; echo 'T2 :'; ls input_t2/t2; mkdir OUTDIR; python3 /comete_sc_pmap_fusion/main.py -pmap input_pmap/pmap -t2 input_t2/t2 -output OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR",
   "schema-version": "0.5",
   "container-image":{
     "type": "singularity",
