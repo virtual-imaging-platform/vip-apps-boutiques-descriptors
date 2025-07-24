@@ -48,8 +48,7 @@
       "id": "reportFile",
       "name": "reportFile",
       "path-template": "reportFile/[COIL]_*.pdf",
-      "path-template-stripped-extensions":[".txt"],
-      "value-key": "[OUTPUT_PDF]"
+      "path-template-stripped-extensions":[".txt"]
     },
     {
       "id": "comparison",
