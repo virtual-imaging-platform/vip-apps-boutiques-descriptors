@@ -3,7 +3,7 @@
   "tool-version": "3.3",
   "description": "Coil Characterization",
   "author": "VIP team",
-  "command-line": "if ! test \"$(basename [COIL] .txt)\" = \"$(head -1 [COIL])\"; then echo \"Invalid coil input: name mismatch\"; exit 1; fi && if test \"$(basename [COMPARISON])\" != comparison; then ln -sfT [COMPARISON] comparison; fi && echo \"before exec:\" && ls -l comparison/ && touch _start && caract_inside.sh [COIL] [FANTOM] [DATA] && echo \"after exec:\" && ls -l comparison/ reportFile/ && OUTPUTS=\"$(find comparison/ -newer _start -name [OUTPUT_MAT]) $(find reportFile/ -newer _start -name [OUTPUT_PDF])\" && echo \"found outputs: $OUTPUTS\" && cp $OUTPUTS ./",
+  "command-line": "if ! test \"$(basename [COIL] .txt)\" = \"$(head -1 [COIL])\"; then echo \"Invalid coil input: name mismatch\"; exit 1; fi && if test \"$(basename [COMPARISON])\" != comparison; then ln -sfT [COMPARISON] comparison; fi && echo \"before exec:\" && ls -l comparison/ && touch _start && caract_inside.sh [COIL] [FANTOM] [DATA] && echo \"after exec:\" && ls -l comparison/ reportFile/ && find comparison/ -not -newer _start -name \"$(basename [OUTPUT_MAT])\" -delete && echo \"after cleanup:\" && ls -l comparison/ reportFile/",
   "container-image": {
     "type": "docker",
     "image": "covid.creatis.insa-lyon.fr/vip-support/coil-caract:3.3",
@@ -38,7 +38,7 @@
       "id": "Comparison",
       "name": "Comparison",
       "type": "File",
-      "description": "Comparison directory containing mat files from previous executions. Please set \"Results directory\" above to the same value, to allow future reuse of the mat file that this execution will produce.",
+      "description": "Comparison directory containing mat files from previous executions. Please set \"Results directory\" above to the parent directory, to allow future reuse of the mat file that this execution will produce.",
       "value-key": "[COMPARISON]",
       "default-value": "/vip/Home/coilCharact/comparison"
     }
@@ -47,20 +47,21 @@
     {
       "id": "reportFile",
       "name": "reportFile",
-      "path-template": "[COIL]_*.pdf",
-      "path-template-stripped-extensions":[".txt"],
-      "value-key": "[OUTPUT_PDF]"
+      "path-template": "reportFile/[COIL]_*.pdf",
+      "path-template-stripped-extensions":[".txt"]
     },
     {
       "id": "comparison",
       "name": "comparison",
-      "path-template": "*_[COIL]_*.mat",
+      "path-template": "comparison/*_[COIL]_*.mat",
       "path-template-stripped-extensions":[".txt"],
       "value-key": "[OUTPUT_MAT]"
     }
   ],
 	"custom": {
     "vip:dot": ["Coil","Phantom","Data","Comparison"],
-    "vip:resultsDirectorySuffix":""
+    "vip:resultsDirectorySuffix":"",
+    "vip:resultsDirectoryDefault":"/vip/Home/coilCharact",
+    "vip:resultsDirectoryDescription":"Results will be placed in subdirectories: \"comparison\" for the .mat file, and \"reportFile\" for the .pdf file."
   }
 }
