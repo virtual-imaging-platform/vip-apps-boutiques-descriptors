@@ -1,0 +1,27 @@
+{
+  "name": "milvue_annotationInit",
+  "tool-version": "1.0",
+  "author": "Rudy NOYELLE / Milvue",
+  "description": "Brain vessel segmentation on TOF MRA images using a deep learning model.",
+  "schema-version": "0.5",
+  "command-line": "unzip [DICOM_INPUT] -d INPUTDIR; mkdir OUTDIR; python /home/appuser/predict.py INPUTDIR OUTDIR && tar -zcvf [OUTPUT_FILE] OUTDIR",
+  "container-image":{
+    "type": "singularity",
+    "image": "milvue:0.1"
+  },
+  "inputs": [
+    {
+      "id": "dicom_input_zip",
+      "name": "TOF dicom_input (ZIP)",
+      "type": "File",
+      "description": "Zip archive of Input medical images in DICOM format.",
+      "value-key": "[DICOM_INPUT]"
+    }],
+  "output-files": [{
+    "id" : "outarchive",
+    "description" : "Tarball containing results in DICOM format.",
+    "name" : "Output archive",
+    "path-template": "[DICOM_INPUT]_output.tar.gz",
+    "value-key": "[OUTPUT_FILE]"
+  }]
+}

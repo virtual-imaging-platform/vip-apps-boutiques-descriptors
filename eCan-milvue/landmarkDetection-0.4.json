@@ -1,0 +1,28 @@
+{
+  "name": "landmarkDetection",
+  "tool-version": "0.4",
+  "author": "Nesrin Mansouri / Univ-Nantes",
+  "description": "Landmark detection pipeline",
+  "schema-version": "0.5",
+  "command-line": "unzip [DICOM_INPUT] -d INPUTDIR; mkdir OUTDIR; bash /workspace/run_nndet.sh INPUTDIR OUTDIR; cp input_params.json OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR  && rm -rf OUTDIR",
+  "container-image":{
+    "type": "singularity",
+    "image": "covid.creatis.insa-lyon.fr/vip-support/combined_docker:0.4",
+    "container-opts": ["--nv"]
+  },
+  "inputs": [
+    {
+      "id": "dicom_input_zip",
+      "name": "T2 dicom_input (ZIP)",
+      "type": "File",
+      "description": "Zip archive of Input medical images in DICOM format.",
+      "value-key": "[DICOM_INPUT]"
+    }],
+  "output-files": [{
+    "id" : "outarchive",
+    "description" : "Tarball containing results",
+    "name" : "Output archive",
+    "path-template": "[DICOM_INPUT]_output.tgz",
+    "value-key": "[OUTPUT_FILE]"
+  }]
+}
