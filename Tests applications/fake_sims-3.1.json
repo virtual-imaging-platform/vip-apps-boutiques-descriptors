@@ -1,0 +1,23 @@
+{
+  "name": "Fake-SIMS",
+  "tool-version": "1",
+  "author": "Shanoir",
+  "description": "Sleep 30",
+  "command-line": "echo '--------------ls -l ../------------' && echo [INPUT] && sleep 30 && cp -r /vip/storage/outputs output_folder && tar -cvzf [OUTPUT_FILE] output_folder",
+  "schema-version": "0.5",
+  "inputs": [{
+    "id": "dicom_archive",
+    "name": "Dicom Archive",
+    "type": "File",
+    "description": "Dicom ZIP including json listing",
+    "value-key": "[INPUT]"
+  }
+  ],
+  "output-files": [{
+    "description" : "Tarball containing outputs.",
+    "id" : "outarchive",
+    "name" : "Output archive",
+    "path-template": "tarball_output.tgz",
+    "value-key": "[OUTPUT_FILE]"
+  }]
+}
