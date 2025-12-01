@@ -1,0 +1,51 @@
+{
+  "name" : "PICNIC_3DExtract",
+  "tool-version" : "0.1",
+  "author" : "Karine Choquet",
+  "command-line" : "mkdir INPUTS OUTPUTS; unzip [SEGS_ZIP] -d INPUTS; cp [IN] INPUTS; python /app/2_PICNIC_3DRadiomicExtraction.py --base-dir INPUTS --output-dir OUTPUTS --num-workers 2 --yaml-dir /app/setting [PARAM] && tar czvf [OUTPUT_FILE] -C OUTPUTS .",
+  "container-image": {
+    "image": "docker.io/karinechoquet/picnic:0.1",
+    "type": "docker"
+  },
+  "description" : "TODO",
+  "inputs" : [
+    {
+      "description" : "Segmentation zip.",
+      "id" : "segs",
+      "name" : "Segmentation ZIP",
+      "optional" : false,
+      "type" : "File",
+      "value-key" : "[SEGS_ZIP]"
+    },
+    {
+      "description" : "NRRD Input",
+      "id" : "in",
+      "name" : "NRDD Input",
+      "optional" : false,
+      "type" : "File",
+      "value-key" : "[IN]"
+    },
+    {
+      "command-line-flag" : "--params",
+      "description" : "params (R2B32).",
+      "id" : "param",
+      "name" : "Param",
+      "optional" : true,
+      "default-value": "R2B32",
+      "type" : "String",
+      "value-key" : "[PARAM]"
+    }
+  ],
+  "output-files" : [
+    {
+      "description" : "Tarball of results.",
+      "id" : "outfile",
+      "name" : "Output archive",
+      "optional" : false,
+      "path-template": "[IN]_output.tgz",
+      "path-template-stripped-extensions": [".nrrd"],
+      "value-key": "[OUTPUT_FILE]"
+    }
+  ],
+  "schema-version" : "0.5"
+}
