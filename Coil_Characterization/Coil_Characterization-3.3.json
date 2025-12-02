@@ -51,15 +51,15 @@
       "path-template-stripped-extensions":[".txt"]
     },
     {
-      "id": "comparison",
-      "name": "comparison",
+      "id": "matOutFile",
+      "name": "matOutFile",
       "path-template": "comparison/*_[COIL]_*.mat",
       "path-template-stripped-extensions":[".txt"],
       "value-key": "[OUTPUT_MAT]"
     }
   ],
 	"custom": {
-    "vip:dot": ["Coil","Phantom","Data","Comparison"],
+    "vip:dot": ["Coil","Phantom","Data"],
     "vip:resultsDirectorySuffix":"",
     "vip:resultsDirectoryDefault":"/vip/Home/coilCharact",
     "vip:resultsDirectoryDescription":"Results will be placed in subdirectories: \"comparison\" for the .mat file, and \"reportFile\" for the .pdf file."
