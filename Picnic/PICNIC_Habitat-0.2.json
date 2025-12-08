@@ -1,0 +1,33 @@
+{
+  "name" : "PICNIC_Habitat",
+  "tool-version" : "0.2",
+  "author" : "Karine Choquet",
+  "command-line" : "mkdir INPUTS OUTPUTS; unzip [IN_ZIP] -d INPUTS; python /app/3_PICNIC_habitat_WCSS.py --base-dir INPUTS --output-dir OUTPUTS && tar czvf [OUTPUT_FILE] -C OUTPUTS .",
+  "container-image": {
+    "image": "docker.io/karinechoquet/picnic:0.2",
+    "type": "docker"
+  },
+  "description" : "TODO",
+  "inputs" : [
+    {
+      "description" : "Input zip.",
+      "id" : "in",
+      "name" : "Input ZIP",
+      "optional" : false,
+      "type" : "File",
+      "value-key" : "[IN_ZIP]"
+    }
+  ],
+  "output-files" : [
+    {
+      "description" : "Tarball of results.",
+      "id" : "outfile",
+      "name" : "Output archive",
+      "optional" : false,
+      "path-template": "[IN_ZIP]_output.tgz",
+      "path-template-stripped-extensions": [".zip"],
+      "value-key": "[OUTPUT_FILE]"
+    }
+  ],
+  "schema-version" : "0.5"
+}
