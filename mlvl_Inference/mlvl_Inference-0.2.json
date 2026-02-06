@@ -1,7 +1,7 @@
 {
   "name": "mlvl_Inference",
   "tool-version": "0.2",
-  "description": "Guideline: https://www.creatis.insa-lyon.fr/~phild/vip/vip.html",
+  "description": "Guideline: https://www.creatis.insa-lyon.fr/~phild/vip/vip.html. If you use our work, please cite this publication: Matthieu Martin, Bruno Sciolla, Michaël Sdika, Philippe Quétin, Philippe Delachartre, Automatic segmentation and location learning of neonatal cerebral ventricles in 3D ultrasound data combining CNN and CPPN, Computers in Biology and Medicine, Volume 131, 2021, 104268, ISSN 0010-4825, https://doi.org/10.1016/j.compbiomed.2021.104268.",
   "author": "Pierre Erbacher, Philippe Delachartre",
   "command-line": "myPATH=$PWD; cp [DATA_INF] /mlvl/. ;cd /mlvl ;fbname=$(basename [DATA_INF] .mat); python Inference.py Unet0.h5 /mlvl/${fbname}.mat; cp ${fbname}_infer.nii $myPATH/[RESULTS]",
   "schema-version": "0.5",
