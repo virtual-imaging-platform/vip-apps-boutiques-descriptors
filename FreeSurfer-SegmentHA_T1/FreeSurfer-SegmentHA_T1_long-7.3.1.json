@@ -1,0 +1,64 @@
+{
+  "name": "FreeSurfer-SegmentHA-LONG-T1",
+  "container-image": {
+    "image": "docker.io/camarasu/freesurfer_mcr:7.3.1",
+    "type": "docker"
+  },
+  "tool-version": "7.3.1",
+  "command-line": "export SUBJECTS_DIR=$PWD && export FS_LICENSE=$PWD/[LICENSE_FILE] && BASE_FOLDER=$(basename [BASE_ID]) && BASE_FOLDER=${BASE_FOLDER%.tar.gz} && BASE_FOLDER=${BASE_FOLDER%.tgz} && tar -xzf [BASE_ID] -C . && tar -xzf [TP_TARBALL_LONG] -C . && ls -d *.long.$BASE_FOLDER >/dev/null 2>&1 && segmentHA_T1_long.sh \"$BASE_FOLDER\" $PWD && tar -czvf segmentHA_long_outputs.$BASE_FOLDER.tar.gz *.long.$BASE_FOLDER",
+  "author": "Laboratory for Computational Neuroimaging",
+  "suggested-resources": {
+    "ram": 8192,
+    "walltime-estimate": 600,
+    "cpu-cores": 1
+  },
+  "schema-version": "0.5",
+  "output-files": [
+    {
+      "id": "long_ha_tarball",
+      "optional": false,
+      "name": "SegmentHA longitudinal results",
+      "path-template": "segmentHA_long_outputs.*.tar.gz"
+    }
+  ],
+  "error-codes": [
+    {
+      "description": "Crashed",
+      "code": 1
+    }
+  ],
+  "inputs": [
+    {
+      "id": "LICENSE_FILE",
+      "name": "License file",
+      "type": "File",
+      "optional": false,
+      "value-key": "[LICENSE_FILE]",
+      "description": "Valid license file needed to run FreeSurfer."
+    },
+    {
+      "id": "BASE_ID",
+      "name": "Base template tar",
+      "type": "File",
+      "optional": false,
+      "value-key": "[BASE_ID]"
+    },
+    {
+      "id": "TP_TARBALL_LONG",
+      "name": "Longitudinal timepoints tarball",
+      "type": "File",
+      "optional": false,
+      "value-key": "[TP_TARBALL_LONG]"
+    }
+  ],
+  "custom": {
+    "cbrain:author": "Natacha Beck <natacha.beck@mcgill.ca>",
+    "cbrain:readonly-input-files": true,
+    "vip:directoryInputs": {
+      "TP_TARBALL_LONG": {"patterns":["*.tgz","*.tar.gz"]},
+      "BASE_ID": {"patterns":["*.tgz","*.tar.gz"]}
+    },
+    "vip:dot": ["TP_TARBALL_LONG","BASE_ID"]
+  },
+  "description": "Runs Longitudinal hippocampus and amygdala subfield segmentation using segmentHA_T1_long.sh guided by the subject-specific base/template."
+}

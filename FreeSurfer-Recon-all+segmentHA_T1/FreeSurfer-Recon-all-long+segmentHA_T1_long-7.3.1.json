@@ -1,0 +1,157 @@
+{
+  "name": "FreeSurfer-Recon-all-LONG+segmentHA_T1_long",
+  "container-image": {
+    "image": "docker.io/camarasu/freesurfer_mcr:7.3.1",
+    "type": "docker"
+  },
+  "tool-version": "7.3.1",
+  "command-line": "export SUBJECTS_DIR=$PWD && export FS_LICENSE=$PWD/[LICENSE_FILE] && BASE_FOLDER=$(basename [BASE_ID]) && BASE_FOLDER=${BASE_FOLDER%.tar.gz} && BASE_FOLDER=${BASE_FOLDER%.tgz} && [ -d \"$BASE_FOLDER\" ] || tar -xzf [BASE_ID] -C . && TP_LIST=$(tar -tf [TP_TARBALL] | awk -F/ '$2==\"\" && $1!=\"\" {print $1}') && tar -xzf [TP_TARBALL] -C . && for TP in $TP_LIST; do recon-all -long \"$TP\" \"$BASE_FOLDER\" [DIRECTIVES] [QCACHE] [MPRAGE] [3T] [CW256] [NOTAL-CHECK] [BRAINSTEM-STRUCTURES] [NO-WSGCAATLAS] [NO-SKULLSTRIP]  && segmentHA_T1_long.sh \"$BASE_FOLDER\" $PWD ; done && tar -czvf segmentHA_long_outputs.$BASE_FOLDER.tar.gz *.long.$BASE_FOLDER",
+  "author": "Laboratory for Computational Neuroimaging",
+  "suggested-resources": {
+    "ram": 8192,
+    "walltime-estimate": 600,
+    "cpu-cores": 1
+  },
+  "schema-version": "0.5",
+  "output-files": [
+    {
+      "id": "long_tarball",
+      "optional": false,
+      "name": "Longitudinal results tarball",
+      "path-template": "segmentHA_long_outputs.*.tar.gz"
+    }
+  ],
+  "error-codes": [
+    {
+      "description": "Crashed",
+      "code": 1
+    }
+  ],
+  "inputs": [
+    {
+      "id": "LICENSE_FILE",
+      "name": "License file",
+      "type": "File",
+      "optional": false,
+      "value-key": "[LICENSE_FILE]",
+      "description": "Valid license file needed to run FreeSurfer."
+    },
+    {
+      "id": "BASE_ID",
+      "name": "Base template tar",
+      "type": "File",
+      "optional": false,
+      "value-key": "[BASE_ID]",
+      "description": "A tarball containing the subject's BASE template, which is the output of FreeSurfer-Recon-all-base."
+    },
+    {
+      "id": "TP_TARBALL",
+      "name": "Timepoints tarball",
+      "type": "File",
+      "optional": false,
+      "value-key": "[TP_TARBALL]",
+      "description": "An input tarball containing all FreeSurfer-processed timepoint directories for the patient. Each top-level directory should correspond to a single timepoint to be processed longitudinally against the BASE template."
+    },
+    {
+      "id": "directives",
+      "name": "Directive",
+      "type": "String",
+      "optional": false,
+      "default-value": "-all",
+      "value-key": "[DIRECTIVES]",
+      "value-choices": [
+        "-all",
+        "-autorecon1",
+        "-autorecon2",
+        "-autorecon2-cp",
+        "-autorecon2-wm",
+        "-autorecon2-inflate1",
+        "-autorecon2-perhemi",
+        "-autorecon3"
+      ]
+    },
+    {
+      "id": "qcache_flag",
+      "name": "qcache",
+      "type": "Flag",
+      "optional": true,
+      "description": "Produce the pre-cached files required by the Qdec utility.",
+      "value-key": "[QCACHE]",
+      "command-line-flag": "-qcache"
+    },
+    {
+      "id": "mprage_flag",
+      "name": "mprage",
+      "type": "Flag",
+      "optional": true,
+      "description": "Assume scan parameters are MGH MP-RAGE protocol.",
+      "value-key": "[MPRAGE]",
+      "command-line-flag": "-mprage"
+    },
+    {
+      "id": "3T_flag",
+      "name": "3T",
+      "type": "Flag",
+      "optional": true,
+      "description": "Enable 3T-specific FreeSurfer processing options.",
+      "value-key": "[3T]",
+      "command-line-flag": "-3T"
+    },
+    {
+      "id": "cw256_flag",
+      "name": "cw256",
+      "type": "Flag",
+      "optional": true,
+      "description": "Use when images have a field of view larger than 256.",
+      "value-key": "[CW256]",
+      "command-line-flag": "-cw256"
+    },
+    {
+      "id": "notal_flag",
+      "name": "Notal check",
+      "type": "Flag",
+      "optional": true,
+      "description": "Skip automatic Talairach alignment failure detection.",
+      "value-key": "[NOTAL-CHECK]",
+      "command-line-flag": "-notal-check"
+    },
+    {
+      "id": "brainstem_structures_flag",
+      "name": "Brainstem Structures",
+      "type": "Flag",
+      "optional": true,
+      "description": "Enable segmentation of brainstem structures.",
+      "value-key": "[BRAINSTEM-STRUCTURES]",
+      "command-line-flag": "-brainstem-structures"
+    },
+    {
+      "id": "no_wsgcaatlas_flag",
+      "name": "No wsgcaatlas",
+      "type": "Flag",
+      "optional": true,
+      "description": "Do not use GCA atlas during skull stripping.",
+      "value-key": "[NO-WSGCAATLAS]",
+      "command-line-flag": "-no-wsgcaatlas"
+    },
+    {
+      "id": "noskullstrip_flag",
+      "name": "No skull strip",
+      "type": "Flag",
+      "optional": true,
+      "description": "Exclude skull stripping step.",
+      "value-key": "[NO-SKULLSTRIP]",
+      "command-line-flag": "-noskullstrip"
+    }
+  ],
+    "custom": {
+        "cbrain:author": "Natacha Beck <natacha.beck@mcgill.ca>",
+        "cbrain:readonly-input-files": true,
+        "vip:directoryInputs": {
+            "TP_TARBALL": {"patterns":["*.tgz","*.tar.gz"]},
+            "BASE_ID": {"patterns":["*.tgz","*.tar.gz"]}
+        },
+        "vip:dot": ["TP_TARBALL","BASE_ID"]
+    },
+  "description": "Runs the third step of FreeSurfer longitudinal processing pipeline (recon-all -long) by performing whole-brain segmentation guided by the subject-specific base/template. Longitudinal hippocampus and amygdala subfield segmentation is then performed using segmentHA_T1_long.sh, also guided by the subject-specific base/template."
+}
+
