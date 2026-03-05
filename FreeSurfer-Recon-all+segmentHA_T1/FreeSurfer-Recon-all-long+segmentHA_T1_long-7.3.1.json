@@ -152,6 +152,6 @@
         },
         "vip:dot": ["TP_TARBALL","BASE_ID"]
     },
-  "description": "Runs the third step of FreeSurfer longitudinal processing pipeline (recon-all -long) by performing whole-brain segmentation guided by the subject-specific base/template. Longitudinal hippocampus and amygdala subfield segmentation is then performed using segmentHA_T1_long.sh, also guided by the subject-specific base/template."
+  "description": "Runs the third step of FreeSurfer longitudinal processing pipeline (recon-all -long) by performing whole-brain segmentation guided by the subject-specific base/template. Longitudinal hippocampus and amygdala subfield segmentation is then performed using segmentHA_T1_long.sh, also guided by the subject-specific base/template. Please note that the use of FreeSurfer is governed by the FreeSurfer Software License Agreement (https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSoftwareLicense). A personal license.txt key file is necessary to run the software. To obtain your license file, please register at https://surfer.nmr.mgh.harvard.edu/registration.html"
 }
 
