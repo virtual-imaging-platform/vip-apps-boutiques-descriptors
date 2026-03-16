@@ -7,7 +7,7 @@
     },
     "tool-version": "9.4.1",
     "command-line": "/software/gate/launchGate.sh [INPUT] [JOBNB] [NBJOBS] [MACFILE] [RESULTS]",
-    "author": "CREATIS lab",
+    "author": "The OpenGATE Collaboration",
     "inputs": [
         {
             "id": "gateInput",
@@ -56,5 +56,5 @@
       "vip:intIteratorInputs": ["jobNumber"],
       "vip:overriddenInputs": {"jobNumber":"numberOfJobs"}
     },
-    "description": "This application runs GATE on the EGI eInfrastructure. The documentation entry point is available <a href=\"http://www.opengatecollaboration.org/gatelab\">here</a>."
+    "description": "GATE is an open-source Monte Carlo simulation platform designed for modeling and simulating medical imaging systems, radiotherapy, and radiation dosimetry. It extends Geant4 with features tailored for time-dependent simulations, imaging physics, and therapy modeling.  The documentation entry point is available <a href=\"http://www.opengatecollaboration.org/\">here</a>. Please respect the license available at https://github.com/OpenGATE/Gate/blob/develop/LICENSE.md"
 }

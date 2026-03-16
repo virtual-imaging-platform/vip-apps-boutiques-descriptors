@@ -1,8 +1,8 @@
 {
     "name": "fsl_bet",
     "tool-version": "6",
-    "author": "Sandesh PATIL",
-    "description": "This application launches the bet (Brain Extraction tool) tool from the <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSL\">FSL</a> software(v6).<br />Documentation on the bet function can be found <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET/UserGuide\">here</a>. <br /> You must respect its <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Licence\">software license</a>",
+    "author": "The University of Oxford",
+    "description": "This application launches the bet (Brain Extraction tool) tool from the <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSL\">FSL</a> software(v6).<br />Documentation on the bet function can be found <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET/UserGuide\">here</a>. <br /> You must respect its <a href=\"https://fsl.fmrib.ox.ac.uk/fsl/docs/license.html\">software license</a>",
     "command-line": "bet [INPUT_FILE] [MASK] [FRACTIONAL_INTENSITY] [VERTICAL_GRADIENT] [CENTER_OF_GRAVITY] [OVERLAY_FLAG] [BINARY_MASK_FLAG] [APPROX_SKULL_FLAG] [NO_SEG_OUTPUT_FLAG] [VTK_VIEW_FLAG] [HEAD_RADIUS] [THRESHOLDING_FLAG] [ROBUST_ITERS_FLAG] [RES_OPTIC_CLEANUP_FLAG] [REDUCE_BIAS_FLAG] [SLICE_PADDING_FLAG] [MASK_WHOLE_SET_FLAG] [ADD_SURFACES_FLAG] [ADD_SURFACES_T2] [VERBOSE_FLAG] [DEBUG_FLAG] && tar -cvzf [MASK].tar.gz [MASK]*",
     "container-image": {
         "image": "docker.io/diannepat/fsl6:latest",

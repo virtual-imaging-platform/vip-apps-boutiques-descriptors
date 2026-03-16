@@ -1,8 +1,8 @@
 {
   "name": "LCModel",
   "tool-version": "0.2",
-  "author": "Hélène RATINEY",
-  "description": "MR spectrosocpy signal quantification software",
+  "author": "Stephen Provencher",
+  "description": "MR spectrosocpy signal quantification software. More details available on https://s-provencher.com/lcmodel.shtml. Please check LCModel license at https://s-provencher.com/lcm-license.shtml",
   "command-line": "bash /.lcmodel/bin/run-lcmodel.sh [CTRL_FILE] [SIGNAL_FILE] [MAKEBASIS_FILE] [ZIP_DATA] [OUT_FILE]; ps2pdf output/*.ps [PDF_FILE]",
   "container-image": {
     "image": "covid.creatis.insa-lyon.fr/vip-support/lcmodel:0.2",
