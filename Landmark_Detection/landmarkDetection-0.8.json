@@ -4,10 +4,10 @@
     "author": "Nesrin Mansouri / Univ-Nantes",
     "description": "Landmark detection pipeline",
     "schema-version": "0.5",
-    "command-line": "unzip [DICOM_INPUT] -d INPUTDIR; mkdir OUTDIR; bash /workspace/run_nndet.sh INPUTDIR; cp -r /workspace/HEATMAP_TEST_final/T220/BB_TEST/predictions_1/* OUTDIR && cp input_params.json OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR && rm -rf OUTDIR",
+    "command-line": "unzip [DICOM_INPUT] -d INPUTDIR; mkdir OUTDIR; bash /workspace/run_nndet.sh INPUTDIR OUTDIR; cp input_params.json OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR  && rm -rf OUTDIR",
     "container-image":{
       "type": "singularity",
-      "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_private/landmark_docker:0.8",
+      "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_private/landmark_detection:0.8",
       "container-opts": ["--nv"]
     },
     "inputs": [
