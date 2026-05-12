@@ -140,40 +140,43 @@
         }
     ],
     "output-files": [
-    {
-      "description": "Pastis MRUI reconstructed data",
-      "id": "mrui_pastis",
-      "list": false,
-      "name": "Pastis MRUI Reconstructed",
-      "path-template": "[OUTNAME]RecPastis.mrui"
-    },
-    {
-      "description": "Bruker MRUI reconstructed data",
-      "id": "mrui_bruker",
-      "list": false,
-      "name": "Pastis MRUI Reconstructed",
-      "path-template": "[OUTNAME]RecBruker.mrui"
-    },
-    {
-      "description": "Pastis RAW reconstructed data",
-      "id": "raw_pastis",
-      "list": false,
-      "name": "Pastis MRUI Reconstructed",
-      "path-template": "[OUTNAME]RecPastis.RAW"
-    },
-    {
-      "description": "Bruker RAW reconstructed data",
-      "id": "raw_bruker",
-      "list": false,
-      "name": "Pastis MRUI Reconstructed",
-      "path-template": "[OUTNAME]RecBruker.RAW"
-    },
-    {
-      "description": "PDF reconstruction summary",
-      "id": "pdf",
-      "list": false,
-      "name": "PDF",
-      "path-template": "[OUTNAME]-summary.pdf"
+        {
+          "description": "Pastis MRUI reconstructed data",
+          "id": "mrui_pastis",
+          "list": false,
+          "name": "Pastis MRUI Reconstructed",
+          "path-template": "[OUTNAME]RecPastis.mrui"
+        },
+        {
+          "description": "Bruker MRUI reconstructed data",
+          "id": "mrui_bruker",
+          "list": false,
+          "name": "Pastis MRUI Reconstructed",
+          "path-template": "[OUTNAME]RecBruker.mrui"
+        },
+        {
+          "description": "Pastis RAW reconstructed data",
+          "id": "raw_pastis",
+          "list": false,
+          "name": "Pastis MRUI Reconstructed",
+          "path-template": "[OUTNAME]RecPastis.RAW"
+        },
+        {
+          "description": "Bruker RAW reconstructed data",
+          "id": "raw_bruker",
+          "list": false,
+          "name": "Pastis MRUI Reconstructed",
+          "path-template": "[OUTNAME]RecBruker.RAW"
+        },
+        {
+          "description": "PDF reconstruction summary",
+          "id": "pdf",
+          "list": false,
+          "name": "PDF",
+          "path-template": "[OUTNAME]-summary.pdf"
+        }
+    ],
+    "custom": {
+        "vip:dot": ["fid", "acqp", "method", "refscan", "rawjob0", "outname"]
     }
-    ]
 }

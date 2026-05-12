@@ -155,5 +155,8 @@
             "name": "pdf",
             "path-template": "[OUTNAME]_summary.pdf"
         }
-    ]
+    ],
+    "custom": {
+        "vip:dot": ["fid", "acqp", "method", "refscan", "rawjob0", "outname"]
+    }
 }
