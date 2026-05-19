@@ -1,0 +1,28 @@
+{
+  "name": "CSA",
+  "tool-version": "1",
+  "author": "Empenn",
+  "description": "cross-sectional-area tool",
+  "command-line": "echo '--------------ls -l ../------------' && ls -l ; unzip [INPUT] -d INPUTDIR; rename -v 's/\\.nii\\.gz$/.nii/' INPUTDIR/*.nii.gz; gzip INPUTDIR/*.nii; mkdir OUTPUT; bash /usr/local/bin/launch-script.sh INPUTDIR OUTPUT && cp input_params.json OUTPUT/ && tar -cvzf [OUTPUT_FILE] OUTPUT",
+  "schema-version": "0.5",
+  "tool-version": "1",
+  "container-image":{
+    "type": "singularity",
+    "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_public/csa:1.1"
+  },
+  "inputs": [{
+    "id": "T1_archive",
+    "name": "T1 Archive",
+    "type": "File",
+    "description": "Dicom ZIP including T1 inputs",
+    "value-key": "[INPUT]"
+  }
+  ],
+  "output-files": [{
+    "description" : "Tarball containing output.json. ",
+    "id" : "outarchive",
+    "name" : "Output archive",
+    "path-template": "[INPUT]_output.tgz",
+    "value-key": "[OUTPUT_FILE]"
+  }]
+}
