@@ -14,7 +14,7 @@
             "id": "data_archive",
             "name": "Archived rat data",
             "type": "File",
-            "description": "Archive of rat data in the tar format (e.g 'rat.tar') containing directories of each day containing several acquisition raw files [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE]",
+            "description": "Archive of rat data in the tar format (e.g 'rat.tar') containing directories of each day containing several acquisition raw files ('fid' 'acqp' 'method' 'fid.refscan' 'rawdata.job0')",
             "value-key": "[DATA]",
             "list": false,
             "optional": false
