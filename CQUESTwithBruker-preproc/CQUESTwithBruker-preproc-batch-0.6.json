@@ -7,62 +7,17 @@
     },
     "author": "Hélène RATINEY / Denis Grenier / Théotime Ferh--Delude",
     "description": "Preprocessing pipeline for spectroscopy signals acquired on a Brucker MRI followed by cQuest MR spectrosocpy signal quantification software.<br />",
-    "command-line": "export BASE_DIR=$PWD; unzip [MYZIP]; tar -xf [DATA]; DATA_FOLDER=$(basename [DATA] .tar); DAYS_PATH=$(find \"$DATA_FOLDER\" -maxdepth 1 -type d ! -name \"$DATA_FOLDER\"); metaboliteFile=$(grep -m 1 '^met=' [PARAM_FILE] | cut -d ' ' -f1 | cut -d '=' -f2 | awk -v base=\"$BASE_DIR/\" '{print base $0}'); files=( '[FIDFILE]' '[ACQPFILE]' '[METHODFILE]' '[REFSCANFILE]' '[RAWJOB0FILE]' ); for DAY_PATH in $DAYS_PATH; do readarray -d '' STEAM_DIRS_PATH < <(find \"$DAY_PATH\" -maxdepth 1 -type d -name \"*STEAM*\" -print0); for STEAM_DIR_PATH in \"${STEAM_DIRS_PATH[@]}\"; do old_path=\"$STEAM_DIR_PATH\"; STEAM_DIR_PATH=\"${STEAM_DIR_PATH// /}\"; mv \"$old_path\" \"$STEAM_DIR_PATH\"; for file in \"${files[@]}\"; do if [[ ! -f \"$STEAM_DIR_PATH/Raw/$file\" ]]; then echo \"File not found: $file in $STEAM_DIR_PATH/Raw\" && exit 1; fi; done; python3 /bruker-spectro-processing-pipeline/vip_prepro.py --fid \"$STEAM_DIR_PATH/Raw/[FIDFILE]\" --acqp \"$STEAM_DIR_PATH/Raw/[ACQPFILE]\" --method \"$STEAM_DIR_PATH/Raw/[METHODFILE]\" --refscan \"$STEAM_DIR_PATH/Raw/[REFSCANFILE]\" --rawjob0 \"$STEAM_DIR_PATH/Raw/[RAWJOB0FILE]\" [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --metabolite \"$metaboliteFile\" --outname [OUTNAME] --outpath \"./$STEAM_DIR_PATH\"; echo \"Preprocessing finished, listing files and launching cQuest\"; ls \"$STEAM_DIR_PATH\"; /cquest_exec/cquestCml -f [PARAM_FILE] \"$STEAM_DIR_PATH/[OUTNAME]RecBruker.mrui\"; /cquest_exec/cquestCml -f [PARAM_FILE] \"$STEAM_DIR_PATH/[OUTNAME]RecPastis.mrui\"; done; done; find \"$DATA_FOLDER\" -type f -name '[OUTNAME]*' -print0 | tar --null --files-from - -czf [OUT_FILE]",
+    "command-line": "export BASE_DIR=$PWD; unzip [MYZIP]; tar -xf [DATA]; DATA_FOLDER=$(basename [DATA] .tar); DAYS_PATH=$(find \"$DATA_FOLDER\" -maxdepth 1 -type d ! -name \"$DATA_FOLDER\"); metaboliteFile=$(grep -m 1 '^met=' [PARAM_FILE] | cut -d ' ' -f1 | cut -d '=' -f2 | awk -v base=\"$BASE_DIR/\" '{print base $0}'); files=( 'fid' 'acqp' 'method' 'fid.refscan' 'rawdata.job0' ); for DAY_PATH in $DAYS_PATH; do readarray -d '' STEAM_DIRS_PATH < <(find \"$DAY_PATH\" -maxdepth 1 -type d -name \"*STEAM*\" -print0); for STEAM_DIR_PATH in \"${STEAM_DIRS_PATH[@]}\"; do old_path=\"$STEAM_DIR_PATH\"; STEAM_DIR_PATH=\"${STEAM_DIR_PATH// /}\"; mv \"$old_path\" \"$STEAM_DIR_PATH\"; for file in \"${files[@]}\"; do if [[ ! -f \"$STEAM_DIR_PATH/Raw/$file\" ]]; then echo \"File not found: $file in $STEAM_DIR_PATH/Raw\" && exit 1; fi; done; python3 /bruker-spectro-processing-pipeline/vip_prepro.py --fid \"$STEAM_DIR_PATH/Raw/fid\" --acqp \"$STEAM_DIR_PATH/Raw/acqp\" --method \"$STEAM_DIR_PATH/Raw/method\" --refscan \"$STEAM_DIR_PATH/Raw/fid.refscan\" --rawjob0 \"$STEAM_DIR_PATH/Raw/rawdata.job0\" [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --metabolite \"$metaboliteFile\" --outname [OUTNAME] --outpath \"./$STEAM_DIR_PATH\"; echo \"Preprocessing finished, listing files and launching cQuest\"; ls \"$STEAM_DIR_PATH\"; /cquest_exec/cquestCml -f [PARAM_FILE] \"$STEAM_DIR_PATH/[OUTNAME]RecBruker.mrui\"; /cquest_exec/cquestCml -f [PARAM_FILE] \"$STEAM_DIR_PATH/[OUTNAME]RecPastis.mrui\"; done; done; find \"$DATA_FOLDER\" -type f -name '[OUTNAME]*' -print0 | tar --null --files-from - -czf [OUT_FILE]",
     "schema-version": "0.5",
     "inputs": [
         {
             "id": "data_archive",
             "name": "Archived rat data",
             "type": "File",
-            "description": "Archive of a rat data containing directories of each day containing several acquisition raw files [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE]",
+            "description": "Archive of rat data in the tar format (e.g 'rat.tar') containing directories of each day containing several acquisition raw files [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE]",
             "value-key": "[DATA]",
             "list": false,
             "optional": false
-        },
-        {
-            "id": "fid",
-            "name": "fid",
-            "type": "String",
-            "optional": true,
-            "default-value": "fid",
-            "description": "Name of the fid file",
-            "value-key": "[FIDFILE]"
-        },
-        {
-            "id": "acqp",
-            "name": "acqp",
-            "type": "String",
-            "optional": true,
-            "default-value": "acqp",
-            "description": "Name of the acqp file",
-            "value-key": "[ACQPFILE]"
-        },
-        {
-            "id": "method",
-            "name": "method",
-            "type": "String",
-            "optional": true,
-            "default-value": "method",
-            "description": "Name of the method file",
-            "value-key": "[METHODFILE]"
-        },
-        {
-            "id": "refscan",
-            "name": "refscan",
-            "type": "String",
-            "optional": true,
-            "default-value": "fid.refscan",
-            "description": "Name of the fid.refscan file",
-            "value-key": "[REFSCANFILE]"
-        },
-        {
-            "id": "rawjob0",
-            "name": "rawjob0",
-            "type": "String",
-            "optional": true,
-            "default-value": "rawdata.job0",
-            "description": "Name of the rawdata.job0 file",
-            "value-key": "[RAWJOB0FILE]"
         },
         {
             "id": "outname",
