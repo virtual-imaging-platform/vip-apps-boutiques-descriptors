@@ -20,7 +20,7 @@ for DAY_PATH in $DAYS_PATH; do
 	for STEAM_DIR_PATH in \"${STEAM_DIRS_PATH[@]}\"; do
 		old_path=\"$STEAM_DIR_PATH\"
 		STEAM_DIR_PATH=\"${STEAM_DIR_PATH// /}\"
-		mv \"$old_path\" \"$STEAM_DIR_PATH\"
+		[[ \"$old_path\" != \"$STEAM_DIR_PATH\" ]] && mv \"$old_path\" \"$STEAM_DIR_PATH\"
 		for file in \"${files[@]}\"; do
 			if [[ ! -f \"$STEAM_DIR_PATH/Raw/$file\" ]]; then
 				echo \"File not found: $file in $STEAM_DIR_PATH/Raw\"
@@ -35,4 +35,3 @@ for DAY_PATH in $DAYS_PATH; do
 	done
 done
 cd tmp && find . -type f -name '[OUTNAME]*' -print0 | tar --null --files-from - -czf [OUT_FILE]
-
