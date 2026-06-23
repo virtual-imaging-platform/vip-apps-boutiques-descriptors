@@ -32,7 +32,7 @@
             "type": "File",
             "description": "File setting up constraints, options and prior knowledge used in cQuest algorithm",
             "value-key": "[PARAM_FILE]",
-            "default-value": "/vip/MR Spectroscopy (group)/CQUEST-INPUT/quest_param_117T_A.txt",
+            "default-value": "/vip/PublicApps (group)/MR-Spectroscopy/CQUEST-INPUTS/quest_param_117T_A.txt",
             "list": false,
             "optional": true
         },
@@ -42,7 +42,7 @@
             "type": "File",
             "description": "Archive containing the files listed in the parameter file",
             "value-key": "[MYZIP]",
-            "default-value": "/vip/MR Spectroscopy (group)/CQUEST-INPUT/basis_11_7.zip",
+            "default-value": "/vip/PublicApps (group)/MR-Spectroscopy/CQUEST-INPUTS/basis_11_7.zip",
             "list": false,
             "optional": true
         },
