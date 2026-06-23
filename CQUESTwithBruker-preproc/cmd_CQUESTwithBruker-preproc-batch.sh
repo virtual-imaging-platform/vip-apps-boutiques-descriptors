@@ -34,4 +34,4 @@ for DAY_PATH in $DAYS_PATH; do
 		/cquest_exec/cquestCml -f [PARAM_FILE] \"$STEAM_DIR_PATH/[OUTNAME]RecPastis.mrui\"
 	done
 done
-cd tmp && find . -type f -name '[OUTNAME]*' -print0 | tar --null --files-from - -czf [OUT_FILE]
+find tmp -type f -name '[OUTNAME]*' -print0 | tar --transform='s#tmp/##' --null --files-from - -czf [OUT_FILE]
