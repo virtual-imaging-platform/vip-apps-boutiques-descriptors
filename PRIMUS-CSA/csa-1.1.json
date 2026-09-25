@@ -2,10 +2,9 @@
   "name": "CSA",
   "tool-version": "1.1",
   "author": "Empenn",
-  "description": "cross-sectional-area tool",
+  "description": "Cross-Sectional Area (CSA) tool. From a given spinal T1w MRI acquisition, this pipeline extracts the spinal cord segmentation and generates cross-sectional area and shape metrics along the cord (per vertebral level and slice), along with a CSV metrics file and a QC image.",
   "command-line": "echo '--------------ls -l ../------------' && ls -l ; unzip [INPUT] -d INPUTDIR; rename -v 's/\\.nii\\.gz$/.nii/' INPUTDIR/*.nii.gz; gzip INPUTDIR/*.nii; mkdir OUTPUT; bash /usr/local/bin/launch-script.sh INPUTDIR OUTPUT && cp input_params.json OUTPUT/ && tar -cvzf [OUTPUT_FILE] OUTPUT",
   "schema-version": "0.5",
-  "tool-version": "1.1",
   "container-image":{
     "type": "singularity",
     "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_public/csa:1.1"
@@ -14,15 +13,21 @@
     "id": "T1_archive",
     "name": "T1 Archive",
     "type": "File",
-    "description": "Dicom ZIP including T1 inputs",
+    "description": "DICOM ZIP archive containing a T1w spinal MRI acquisition.",
     "value-key": "[INPUT]"
   }
   ],
   "output-files": [{
-    "description" : "Tarball containing output.json. ",
+    "description": "Tarball containing: csa_c2c3.csv, a table of cross-sectional area and shape metrics computed along the spinal cord (per slice and vertebral level), including Slice (I->S), VertLevel, DistancePMJ, MEAN/STD(area), MEAN/STD(angle_AP), MEAN/STD(angle_RL), MEAN/STD(diameter_AP), MEAN/STD(diameter_AP_ellipse), MEAN/STD(diameter_RL), MEAN/STD(length_anterior), MEAN/STD(length_posterior), MEAN/STD(eccentricity), MEAN/STD(orientation), MEAN/STD(solidity), and SUM(length); and qc.png, a visual quality check showing the input from LR-AP and AP-SI views.",
     "id" : "outarchive",
     "name" : "Output archive",
     "path-template": "[INPUT]_output.tgz",
     "value-key": "[OUTPUT_FILE]"
-  }]
+  }],
+  "custom": {
+    "method-summary": "This pipeline is a series of tools from the SCT (Spinal Cord Toolbox) open-source repository, applied in the following steps: generate the spinal cord segmentation, extract the spinal cord segmentation zone, generate vertebral labelling, and generate CSV metrics.",
+    "sources": [
+      "https://github.com/spinalcordtoolbox/spinalcordtoolbox"
+    ]
+  }
 }

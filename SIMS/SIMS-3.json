@@ -2,26 +2,37 @@
   "name": "SIMS",
   "tool-version": "3",
   "author": "Ofsep",
-  "description": "ofsep_sequences_identification.<br />",
+  "description": "Identification of the sequence type from a predefined set, for a given examination (OFSEP 'sims' pipeline). The pipeline analyzes all DICOM files of the examination and produces a JSON file containing the fields identified for each sequence, in particular the type of organ imaged and the sequence type.",
   "command-line": "echo '--------------ls -l ../------------' && ls -l  && unzip [INPUT]; sed -i \"s#/TOUPDATE#$PWD#g\" input.json; bash /app/SIMS/run_identification.sh input.json output.json && cat output.json && mkdir output_folder && cp output.json output_folder && cp input_params.json output_folder/ && tar -cvzf [OUTPUT_FILE] output_folder",
   "schema-version": "0.5",
-  "container-image":{
+  "container-image": {
     "type": "singularity",
     "image": "sims:3.1"
   },
-  "inputs": [{
-    "id": "dicom_archive",
-    "name": "Dicom Archive",
-    "type": "File",
-    "description": "Dicom ZIP including json listing",
-    "value-key": "[INPUT]"
-  }
+  "inputs": [
+    {
+      "id": "dicom_archive",
+      "name": "Dicom Archive",
+      "type": "File",
+      "description": "ZIP archive containing all DICOM files of a given examination, along with a JSON listing (input.json).",
+      "value-key": "[INPUT]",
+      "optional": false
+    }
   ],
-  "output-files": [{
-    "description" : "Tarball containing output.json. ",
-    "id" : "outarchive",
-    "name" : "Output archive",
-    "path-template": "[INPUT]_output.tgz",
-    "value-key": "[OUTPUT_FILE]"
-  }]
+  "output-files": [
+    {
+      "id": "outarchive",
+      "name": "Output archive",
+      "description": "Tarball containing output.json: a JSON file split by series and by volume of the examination. Each part contains information about the corresponding volume/series, which can be clinical, Shanoir, or OFSEP information, in particular the type of organ imaged and the identified sequence type. In the Shanoir context, this file is used to produce statistics and to rename the DICOMs of the examination (the DICOM name being a combination of certain metadata fields identified by the pipeline). Shanoir ids of the DICOMs are also manipulated and stored in this file.",
+      "path-template": "[INPUT]_output.tgz",
+      "value-key": "[OUTPUT_FILE]",
+      "optional": false
+    }
+  ],
+  "custom": {
+    "method-summary": "The SIMS pipeline, owned by OFSEP, produces an output.json file gathering a lot of information about the DICOMs and the series related to the given examination provided as input. Most of this information consists of DICOM metadata, but some (such as the DICOM name) results from a combination of several metadata fields following a specific logic executed by the pipeline. Shanoir ids of the DICOMs are also managed and stored in output.json. After receiving this file, Shanoir uses it to rename the related DICOMs of the examination according to the names obtained.",
+    "sources": [
+      "https://gitlab.inria.fr/sims/sims/"
+    ]
+  }
 }

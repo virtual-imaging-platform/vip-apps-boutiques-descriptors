@@ -2,8 +2,7 @@
   "name": "Sienax",
   "tool-version": "1.3",
   "author": "Oxford Univ",
-  "description": "Structural Image Evaluation, using Normalisation, of Atrophy",
-  "command-line": "echo '--------------ls -l ../------------' && ls -l ; unzip [INPUT] -d INPUTDIR; rename -v 's/\\.nii\\.gz$/.nii/' INPUTDIR/*.nii.gz; gzip INPUTDIR/*.nii; mkdir OUTPUT; bash /usr/local/bin/launch-script.sh INPUTDIR OUTPUT && cp input_params.json OUTPUT/ && tar -cvzf [OUTPUT_FILE] OUTPUT",
+  "description": "Structural Image Evaluation, using Normalisation, of Atrophy (SIENAX). From a given brain MRI (T1w, FLAIR, or T2w acquisition — T1 preferred), this pipeline estimates grey and white matter volumes (both normalized and unnormalized) and produces a CSV file with volume metrics along with QC images.",  "command-line": "echo '--------------ls -l ../------------' && ls -l ; unzip [INPUT] -d INPUTDIR; rename -v 's/\\.nii\\.gz$/.nii/' INPUTDIR/*.nii.gz; gzip INPUTDIR/*.nii; mkdir OUTPUT; bash /usr/local/bin/launch-script.sh INPUTDIR OUTPUT && cp input_params.json OUTPUT/ && tar -cvzf [OUTPUT_FILE] OUTPUT",
   "schema-version": "0.5",
   "container-image":{
     "type": "singularity",
@@ -13,15 +12,21 @@
     "id": "T1_archive",
     "name": "T1 Archive",
     "type": "File",
-    "description": "T1 ZIP including json listing",
+    "description": "ZIP archive of a single brain MRI acquisition (T1w, FLAIR, or T2w; T1w preferred), including a JSON listing.",
     "value-key": "[INPUT]"
   }
   ],
   "output-files": [{
-    "description" : "Tarball containing output.json. ",
+    "description": "Tarball containing: Tissue_volumes.csv (a table with normalized and unnormalized volumes for white matter, grey matter, and total brain tissue, in %), and 4 QC image files (I2std.png, I_bet.png, I_masks.png, I_render.png) providing visual quality checks of the SIENAX processing steps.",
     "id" : "outarchive",
     "name" : "Output archive",
     "path-template": "[INPUT]_output.tgz",
     "value-key": "[OUTPUT_FILE]"
-  }]
+  }],
+  "custom": {
+    "method-summary": "Brain tissue volume, normalized for subject head size, was estimated with SIENAX (Smith 2001, Smith 2002), part of FSL (Smith 2004). SIENAX starts by extracting brain and skull images from the single whole-head input data (Smith 2002b). The brain image is then affine-registered to MNI152 space (Jenkinson 2001, Jenkinson 2002), using the skull image to determine the registration scaling; this is primarily done to obtain the volumetric scaling factor, used as a normalization for head size. Next, tissue-type segmentation with partial volume estimation is carried out (Zhang 2001) to calculate total volume of brain tissue, including separate estimates of grey matter, white matter, peripheral grey matter, and ventricular CSF volumes. When needed, a reorientation to RAS orientation is performed using a routine provided by Youwan Mahé (based on the Nibabel library).",
+    "sources": [
+      "https://github.com/flywheel-apps/fsl-sienax"
+    ]
+  }
 }
