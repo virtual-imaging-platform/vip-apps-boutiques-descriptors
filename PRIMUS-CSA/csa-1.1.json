@@ -2,7 +2,7 @@
   "name": "CSA",
   "tool-version": "1.1",
   "author": "Empenn",
-  "description": "Cross-Sectional Area (CSA) tool. From a given spinal T1w MRI acquisition, this pipeline extracts the spinal cord segmentation and generates cross-sectional area and shape metrics along the cord (per vertebral level and slice), along with a CSV metrics file and a QC image.",
+  "description": "Cross-Sectional Area (CSA) tool. From a given spinal T1w MRI acquisition, this pipeline extracts the spinal cord segmentation and generates cross-sectional area and shape metrics along the cord (per vertebral level and slice), along with a CSV metrics file and a QC image. This pipeline is a series of tools from the SCT (Spinal Cord Toolbox) open-source repository, applied in the following steps: generate the spinal cord segmentation, extract the spinal cord segmentation zone, generate vertebral labelling, and generate CSV metrics. Source: https://github.com/spinalcordtoolbox/spinalcordtoolbox",
   "command-line": "echo '--------------ls -l ../------------' && ls -l ; unzip [INPUT] -d INPUTDIR; rename -v 's/\\.nii\\.gz$/.nii/' INPUTDIR/*.nii.gz; gzip INPUTDIR/*.nii; mkdir OUTPUT; bash /usr/local/bin/launch-script.sh INPUTDIR OUTPUT && cp input_params.json OUTPUT/ && tar -cvzf [OUTPUT_FILE] OUTPUT",
   "schema-version": "0.5",
   "container-image":{
@@ -23,11 +23,5 @@
     "name" : "Output archive",
     "path-template": "[INPUT]_output.tgz",
     "value-key": "[OUTPUT_FILE]"
-  }],
-  "custom": {
-    "method-summary": "This pipeline is a series of tools from the SCT (Spinal Cord Toolbox) open-source repository, applied in the following steps: generate the spinal cord segmentation, extract the spinal cord segmentation zone, generate vertebral labelling, and generate CSV metrics.",
-    "sources": [
-      "https://github.com/spinalcordtoolbox/spinalcordtoolbox"
-    ]
-  }
+  }]
 }

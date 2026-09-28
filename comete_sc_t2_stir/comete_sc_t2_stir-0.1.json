@@ -2,7 +2,8 @@
   "name": "comete_sc_t2_stir",
   "tool-version": "0.1",
   "author": "EMPENN",
-  "description": "Segmentation of spinal cord lesions based on a pair of T2Sag and STIR MRIs. The pipeline takes a T2Sag image and a set of STIR MRIs (the specific STIR corresponding to the T2Sag is not known in advance) and produces a binary lesion segmentation mask, a lesion probability map, and a YAML report describing the volume and location of detected lesions, along with QC elements. If the pipeline fails, an error YAML file describing the transmitted inputs and the cause of failure is produced instead.",  "command-line": "unzip [INPUT_T2] -d T2DIR; unzip [INPUT_STIR] -d STIRDIR; mkdir OUTDIR ; python3 /app_primus/inference_multimodal.py -t T2DIR -s STIRDIR -o OUTDIR && cp input_params.json OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR && chmod -R 777 *",
+  "description": "Segmentation of spinal cord lesions based on a pair of T2Sag and STIR MRIs. The pipeline takes a T2Sag image and a set of STIR MRIs (the specific STIR corresponding to the T2Sag is not known in advance) and produces a binary lesion segmentation mask, a lesion probability map, and a YAML report describing the volume and location of detected lesions, along with QC elements. If the pipeline fails, an error YAML file describing the transmitted inputs and the cause of failure is produced instead.source: https://gitlab.inria.fr/ms-pipelines/scientific_code/spinal_cord/inference/crosssectional_multi_modalities/-/tree/comete_t2_stir?ref_type=heads", 
+   "command-line": "unzip [INPUT_T2] -d T2DIR; unzip [INPUT_STIR] -d STIRDIR; mkdir OUTDIR ; python3 /app_primus/inference_multimodal.py -t T2DIR -s STIRDIR -o OUTDIR && cp input_params.json OUTDIR && tar -cvzf [OUTPUT_FILE] OUTDIR && chmod -R 777 *",
   "schema-version": "0.5",
    "container-image":{
 	  "type": "singularity",
@@ -31,9 +32,7 @@
       "value-key": "[OUTPUT_FILE]"
     }],
   "custom":{
-     "vip:dot":["t2_archive","stir_archive"],
-     "sources": [
-      "https://gitlab.inria.fr/ms-pipelines/scientific_code/spinal_cord/inference/crosssectional_multi_modalities/-/tree/comete_t2_stir?ref_type=heads"
-    ]
+     "vip:dot":["t2_archive","stir_archive"]
+    
   }
 }
