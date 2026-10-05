@@ -1,13 +1,14 @@
 {
   "name": "SIMS",
-  "tool-version": "3.2",
+  "tool-version": "3",
   "author": "Ofsep",
   "description": "Identification of the sequence type from a predefined set, for a given examination (OFSEP 'sims' pipeline). The pipeline analyzes all DICOM files of the examination and produces a JSON file containing the fields identified for each sequence, in particular the type of organ imaged and the sequence type. The SIMS pipeline, owned by OFSEP, produces an output.json file gathering a lot of information about the DICOMs and the series related to the given examination provided as input. Most of this information consists of DICOM metadata, but some (such as the DICOM name) results from a combination of several metadata fields following a specific logic executed by the pipeline. Shanoir ids of the DICOMs are also managed and stored in output.json. After receiving this file, Shanoir uses it to rename the related DICOMs of the examination according to the names obtained. Source: https://gitlab.inria.fr/sims/sims/",
   "command-line": "echo '--------------ls -l ../------------' && ls -l  && tar --zstd -xf [INPUT]; sed -i \"s#/TOUPDATE#$PWD#g\" input.json; bash /app/SIMS/run_identification.sh input.json output.json && cat output.json && mkdir output_folder && cp output.json output_folder && cp input_params.json output_folder/ && tar -cvzf [OUTPUT_FILE] output_folder",
   "schema-version": "0.5",
   "container-image": {
     "type": "singularity",
-    "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_public/sims:3.2"
+    "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_public/sims:3.1"
+
   },
   "inputs": [
     {
