@@ -2,8 +2,7 @@
   "name": "comete_brain_flair",
   "tool-version": "1.1",
   "author": "EMPENN",
-  "description": "comete_brain_flair.<br />",
-  "command-line": "cp -r /root/.anima $HOME/; UNET_INDIR=/data/nnunet/io; mkdir -p $UNET_INDIR; unzip [INPUT_FLAIR] -d $UNET_INDIR; UNET_OUTDIR=/data/nnunet/models/nnUNet/3d_fullres/Task205/nnUNetTrainerV2__nnUNetPlansv2.1; mkdir -p $UNET_OUTDIR; mkdir -p OUTDIR; (cd /longiseg && python3 predict.py -p $UNET_INDIR -tn Task205 -m flair -mn Task205_CS_FULL -f all -cs -o $UNET_OUTDIR) && cp -r $UNET_OUTDIR/Task205_CS_FULL OUTDIR && cp input_params.json OUTDIR/ && tar -cvzf [OUTPUT_FILE] OUTDIR",
+  "description": "Segmentation of brain lesions from a FLAIR MRI scan using LongiSeg4MS, a deep learning-based segmentation tool built on the nnU-Net (no-new-U-Net) open-source framework. While originally designed to detect new multiple sclerosis lesions in longitudinal MRI scans, it can also be applied to cross-sectional data, providing lesion probability maps without considering lesion chronology. LongiSeg4MS applies anisotropic kernels and pooling strategies, favoring 2D-like processing in the early layers. The model was trained on T2-FLAIR data from 92 subjects, combining data from the ISBI (International Symposium on Biomedical Imaging) 2015 edition and two clinical datasets from Montpellier and Rennes. Preprocessing includes brain extraction, reorientation, cropping (to the size required for the 3D U-Nets), bias field correction, and intensity normalisation to [0, 1]. The resulting probability maps are thresholded at the default value of 0.5 to generate binary segmentation masks. LongiSeg4MS was validated on 23 subjects and reached a Dice score of ~0.82. Outputs include a binary segmentation mask, a JSON/TSV file describing detected lesions (center, bounding box, volume, and anatomical location), and a QC PDF report. Sources: https://gitlab.inria.fr/ms-pipelines/scientific_code/brain/inference/longiseg4ms and https://github.com/mic-dkfz/nnunet",  "command-line": "cp -r /root/.anima $HOME/; UNET_INDIR=/data/nnunet/io; mkdir -p $UNET_INDIR; unzip [INPUT_FLAIR] -d $UNET_INDIR; UNET_OUTDIR=/data/nnunet/models/nnUNet/3d_fullres/Task205/nnUNetTrainerV2__nnUNetPlansv2.1; mkdir -p $UNET_OUTDIR; mkdir -p OUTDIR; (cd /longiseg && python3 predict.py -p $UNET_INDIR -tn Task205 -m flair -mn Task205_CS_FULL -f all -cs -o $UNET_OUTDIR) && cp -r $UNET_OUTDIR/Task205_CS_FULL OUTDIR && cp input_params.json OUTDIR/ && tar -cvzf [OUTPUT_FILE] OUTDIR",
   "schema-version": "0.5",
    "container-image":{
           "type": "singularity",
@@ -14,7 +13,7 @@
       "id": "flair_archive",
       "name": "flair archive",
       "type": "File",
-      "description": "NIfTI ZIP of FLAIR image",
+      "description": "NIfTI ZIP archive of a brain FLAIR MRI scan.",
       "value-key": "[INPUT_FLAIR]"
     }
   ],
