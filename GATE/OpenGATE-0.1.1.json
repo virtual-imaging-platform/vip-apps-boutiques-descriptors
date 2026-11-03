@@ -1,0 +1,57 @@
+{
+    "schema-version": "0.5",
+    "name": "OpenGATE",
+    "container-image": {
+        "image": "docker.io/tbaudier/opengate_vip:0.1.1",
+        "type": "singularity",
+	  "container-opts": [
+      "--fakeroot"
+    ]
+    },
+    "tool-version": "0.1.1",
+    "command-line": "/opt/python/cp312-cp312/lib/python3.12/site-packages/opengate/tests/src/advanced_tests/linacs/run_linac_test.sh && echo [NBJOBS] && tar -czvf [RESULTS] /opt/python/cp312-cp312/lib/python3.12/site-packages/opengate/tests/src/advanced_tests/linacs/output",
+    "author": "The OpenGATE Collaboration",
+    "inputs": [
+		{
+			"id": "outputName",
+		    "name": "Output Name",
+			"value-key": "[OUTNAME]",
+			"type": "String",
+			"description": "Name of the output tarball"
+		},
+		{
+			"id": "numberOfJobs",
+			"name": "Number of GATE Jobs",
+			"value-key": "[NBJOBS]",
+			"type": "Number",
+			"integer": true,
+			"default-value": 1,
+			"maximum":500,
+			"description": "The number of the parallel identical jobs to be launched (maximum allowed is 500)."
+		},
+		{
+			"id": "jobNumber",
+			"name": "Job Number",
+			"value-key": "[JOBNB]",
+			"type": "Number",
+			"integer": true,
+			"description": "This should be an iterator on numberOfJobs  rendered invisible to the user"
+		}
+
+    ],
+	"output-files": [
+        {
+            "name": "Output",
+            "optional": false,
+            "description": "The output tarball including GATE resuls",
+            "id": "out_tarball",
+            "path-template": "[OUTNAME]-[JOBNB].tar.gz",
+			"value-key":"[RESULTS]"
+        }
+    ],
+	"custom": {
+      "vip:intIteratorInputs": ["jobNumber"],
+      "vip:overriddenInputs": {"jobNumber":"numberOfJobs"}
+    },
+    "description": "This is a wip test using GATE. GATE is an open-source Monte Carlo simulation platform designed for modeling and simulating medical imaging systems, radiotherapy, and radiation dosimetry. It extends Geant4 with features tailored for time-dependent simulations, imaging physics, and therapy modeling.  The documentation entry point is available <a href=\"http://www.opengatecollaboration.org/\">here</a>. Please respect the license available at https://github.com/OpenGATE/Gate/blob/develop/LICENSE.md."
+}
