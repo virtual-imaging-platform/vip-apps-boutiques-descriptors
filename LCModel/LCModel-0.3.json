@@ -1,0 +1,68 @@
+{
+  "name": "LCModel",
+  "tool-version": "0.3",
+  "author": "Stephen Provencher",
+  "description": "MR spectrosocpy signal quantification software. More details available on https://s-provencher.com/lcmodel.shtml",
+  "command-line": "unzip -j [ZIP_BASIS] -d basis && bash /run_lcmodel.sh [CTRL_FILE] [SIGNAL_FILE] basis [OUTNAME] && tar -czvf [OUTNAME].tar.gz [OUTNAME]_* && rm -rf basis",
+  "container-image": {
+    "image": "covid.creatis.insa-lyon.fr/vip-support/lcmodel:0.3",
+    "type": "docker"
+  },
+  "schema-version": "0.5",
+  "inputs": [
+    {
+      "id": "signal_file",
+      "name": "Signal file",
+      "type": "File",
+      "description": "Text file with extension '.RAW' containing the signal to quantify",
+      "value-key": "[SIGNAL_FILE]",
+      "list": false,
+      "optional": false,
+      "command-line-flag": ""
+    },
+    {
+      "id": "control_file",
+      "name": "Control file",
+      "type": "File",
+      "description": "Text file with extension '.control' setting up constraints, options and prior knowledge used in LCModel algorithm",
+      "value-key": "[CTRL_FILE]",
+      "list": false,
+      "optional": false,
+      "command-line-flag": ""
+    },
+    {
+      "id": "zipped_folder",
+      "name": "Zipped data base folder",
+      "type": "File",
+      "description": "Archive containing all metabolite & macromolecules in .RAW format",
+      "value-key": "[ZIP_BASIS]",
+      "list": false,
+      "optional": false,
+      "command-line-flag": ""
+    },
+    {
+      "id": "outname",
+      "name": "outname",
+      "type": "String",
+      "description": "Prefix name of the output files",
+      "default-value": "result_lcmodel",
+      "value-key": "[OUTNAME]"
+    }
+  ],
+  "output-files": [
+    {
+      "description": "A zipped tarball containing all result files",
+      "id": "output_file",
+      "list": false,
+      "name": "Output file",
+      "path-template": "[OUTNAME].tar.gz"
+    },
+    {
+      "description": "PDF result file",
+      "id": "pdf_file",
+      "list": false,
+      "name": "PDF output file",
+      "path-template": "[OUTNAME]_result.pdf"
+    }
+  ]
+}

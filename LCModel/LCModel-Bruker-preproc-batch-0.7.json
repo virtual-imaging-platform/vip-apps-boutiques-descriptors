@@ -1,0 +1,149 @@
+{
+  "name": "lcmodel-bruker-preproc-batch",
+  "tool-version": "0.7",
+  "author": "Stephen Provencher / Denis Grenier / Théotime Ferh--Delude",
+  "description": "MR spectrosocpy signal batch pipeline over a whole subject directory using bruker-preprocessing and the LCModel quantification software",
+  "command-line": "unzip -j [ZIP_BASIS] -d basis && mkdir -p ROOT_DATA_DIR && case [DATA_FILE] in *.tar) tar -C ROOT_DATA_DIR -xf [DATA_FILE] ;; *.tar.gz | *.tgz) tar -C ROOT_DATA_DIR -xzf [DATA_FILE] ;; *.zip) unzip [DATA_FILE] -d ROOT_DATA_DIR ;; *) exit 1 ;; esac && find ROOT_DATA_DIR -type f -name 'acqp' -exec grep -zrlP '##\\$ACQ_dim_desc=\\( 1 \\)\\nSpectroscopic' {} + | while IFS= read -r f; do d=$(dirname \"$f\") && python3 /bruker-spectro-processing-pipeline/vip_prepro.py --fid \"$d\"/fid --acqp \"$d\"/acqp --method \"$d\"/method --refscan \"$d\"/fid.refscan --rawjob0 \"$d\"/rawdata.job0 [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --outname [OUTNAME] --outpath \"$d\" && bash /run_lcmodel.sh [CTRL_FILE] \"$d\"/[OUTNAME]RecPastis.RAW basis \"$d\"/[OUTNAME]_pastis_lcmodel && bash /run_lcmodel.sh [CTRL_FILE] \"$d\"/[OUTNAME]RecBruker.RAW basis \"$d\"/[OUTNAME]_bruker_lcmodel ; done && find ROOT_DATA_DIR -type f -name \"[OUTNAME]*\" -print0 | tar --null --files-from=- --transform=\"s#^ROOT_DATA_DIR/##\" -czf [OUT_FILE] && rm -rf basis && rm -rf ROOT_DATA_DIR",
+  "container-image": {
+    "image": "covid.creatis.insa-lyon.fr/vip-support/preproc_lcmodel:0.7",
+    "type": "docker"
+  },
+  "schema-version": "0.5",
+  "inputs": [
+    {
+      "id": "data_archive",
+      "name": "Archived rat data",
+      "type": "File",
+      "description": "Archive of rat data in the tar format (e.g 'rat.tar') containing directories of each day containing several acquisition raw files ('fid' 'acqp' 'method' 'fid.refscan' 'rawdata.job0')",
+      "value-key": "[DATA_FILE]",
+      "list": false,
+      "optional": false
+    },
+    {
+      "id": "outname",
+      "name": "outname",
+      "type": "String",
+      "description": "Name of the output file",
+      "value-key": "[OUTNAME]"
+    },
+    {
+      "id": "control_file",
+      "name": "Control file",
+      "type": "File",
+      "description": "Text file with extension '.control' setting up constraints, options and prior knowledge used in LCModel algorithm",
+      "value-key": "[CTRL_FILE]",
+      "list": false,
+      "optional": false,
+      "command-line-flag": ""
+    },
+    {
+      "id": "zipped_folder",
+      "name": "Zipped data base folder",
+      "type": "File",
+      "description": "Archive containing all metabolite & macromolecules in .RAW format",
+      "value-key": "[ZIP_BASIS]",
+      "list": false,
+      "optional": false,
+      "command-line-flag": ""
+    },
+    {
+      "id": "ppm_r",
+      "name": "ppm_r",
+      "type": "String",
+      "optional": true,
+      "default-value": "1.9_2.1",
+      "description": "MUST be an interval in the format start_end   . frequency region in ppm on which phasing operations are focused.",
+      "command-line-flag": "--ppm_r",
+      "value-key": "[PPM_R]"
+    },
+    {
+      "id": "ppm_a",
+      "name": "ppm_a",
+      "type": "String",
+      "optional": true,
+      "default-value": "1.9_2.1",
+      "description": "MUST be an interval in the format start_end   . frequency region in ppm on which SNR and LW analysis are performed (NAA peak).",
+      "command-line-flag": "--ppm_a",
+      "value-key": "[PPM_A]"
+    },
+    {
+      "id": "noise_r",
+      "name": "noise_r",
+      "type": "String",
+      "optional": true,
+      "default-value": "5.5_6",
+      "description": "MUST be an interval in the format start_end   . frequency region in ppm on which noise level is estimated",
+      "command-line-flag": "--noise_r",
+      "value-key": "[NOISE_R]"
+    },
+    {
+      "id": "display_r",
+      "name": "display_r",
+      "type": "String",
+      "optional": true,
+      "default-value": "0.5_5",
+      "description": "MUST be an interval in the format start_end   . frequency region in ppm used to display the spectra",
+      "command-line-flag": "--display_r",
+      "value-key": "[DISPLAY_R]"
+    },
+    {
+      "id": "mean_lw_Hz",
+      "name": "mean_lw_Hz",
+      "type": "Number",
+      "optional": true,
+      "default-value": 20,
+      "description": "Mean linewidth considered as good linewidth for further analysis (Hz)",
+      "command-line-flag": "--mean_lw_Hz",
+      "value-key": "[MEAN_LW]"
+    },
+    {
+      "id": "stdev_lw_Hz",
+      "name": "stdev_lw_Hz",
+      "type": "Number",
+      "optional": true,
+      "default-value": 2,
+      "description": "acceptable standard deviation around the mean linewidth (Hz)",
+      "command-line-flag": "--stdev_lw_Hz",
+      "value-key": "[STDEV_LW]"
+    },
+    {
+      "id": "stdev_fr_ppm",
+      "name": "stdev_fr_ppm",
+      "type": "Number",
+      "optional": true,
+      "default-value": 0.03,
+      "description": "acceptable standard deviation/amplitude of the frequency fluctuation/drift in ppm",
+      "command-line-flag": "--stdev_fr_ppm",
+      "value-key": "[STDEV_FR]"
+    },
+    {
+      "id": "mv_av",
+      "name": "mv_av",
+      "type": "Number",
+      "integer": true,
+      "optional": true,
+      "default-value": 11,
+      "description": "number of spectra in a moving average used in the analyze and reject procedure",
+      "command-line-flag": "--mv_av",
+      "value-key": "[MV_AV]"
+    }
+  ],
+  "output-files": [
+    {
+      "description": "A tarball containing all result files for each scan",
+      "id": "output_file",
+      "list": false,
+      "name": "Output file",
+      "value-key": "[OUT_FILE]",
+      "path-template": "[OUTNAME].tar.gz"
+    }
+  ],
+  "custom": {
+    "vip:dot": [
+      "data_archive",
+      "outname",
+      "control_file",
+      "zipped_folder"
+    ]
+  }
+}
