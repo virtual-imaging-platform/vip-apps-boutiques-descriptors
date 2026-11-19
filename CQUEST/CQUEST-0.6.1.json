@@ -3,7 +3,7 @@
   "tool-version": "0.6.1",
   "author": "Hélène RATINEY",
   "description": "MR spectrosocpy signal quantification software",
-  "command-line": "unzip -j [ZIP_BASIS] -d basis && /run_cquest.sh [PARAM_FILE] [DATA_FILE] && python3 /plot_cquest_result.py -i . -m basis && tar -czvf [OUT_FILE] [DATA_FILE] *quest_estim.mrui *quest_back.mrui *.txt && rm -rf basis",
+  "command-line": "unzip -j [ZIP_BASIS] -d basis && /run_cquest.sh [PARAM_FILE] [DATA_FILE] && python3 /plot_cquest_result.py -i . -o . -m basis && tar -czvf [OUT_FILE] [DATA_FILE] *quest_estim.mrui *quest_back.mrui *.txt && rm -rf basis",
   "container-image": {
     "image": "covid.creatis.insa-lyon.fr/vip-support/preproc_cquest:0.6.1",
     "type": "docker"

@@ -7,7 +7,7 @@
   },
   "author": "Hélène RATINEY / Denis Grenier / Théotime Ferh--Delude",
   "description": "Proprocessing pipeline for spectroscopy signals acquired on a Brucker MRI followed by cQuest MR spectrosocpy signal quantification software.<br />",
-  "command-line": "unzip -j [MYZIP] -d basis; metaboliteFile=$(find basis/ -maxdepth 1 -type f | head -n 1); python3 /bruker-spectro-processing-pipeline/vip_prepro.py [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE] [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --metabolite $metaboliteFile --outname [OUTNAME] --outpath ./; echo \"Preprocessing finished, listing files and launching cQuest\"; ls ; /run_cquest.sh [PARAM_FILE] [BRUKER_MRUI] [PASTIS_MRUI] && python3 /plot_cquest_result.py -i . -o . -m basis",
+  "command-line": "unzip -j [ZIP_BASIS] -d basis && met=$(find basis -name Cr* -print -quit); : \"${met:?Creatine metabolite not found}\" && python3 /bruker-spectro-processing-pipeline/vip_prepro.py [FIDFILE] [ACQPFILE] [METHODFILE] [REFSCANFILE] [RAWJOB0FILE] [PPM_R] [PPM_A] [NOISE_R] [DISPLAY_R] [MEAN_LW] [STDEV_LW] [STDEV_FR] [MV_AV] --metabolite \"$met\" --outname [OUTNAME] --outpath ./ && echo \"Preprocessing finished, listing files and launching cQuest\" && ls && /run_cquest.sh [PARAM_FILE] [BRUKER_MRUI] [PASTIS_MRUI] && python3 /plot_cquest_result.py -i . -o . -m basis && rm -rf basis",
   "schema-version": "0.5",
   "inputs": [
     {
@@ -71,7 +71,7 @@
       "name": "Zipped data base folder for cQuest",
       "type": "File",
       "description": "Archive containing the files listed in the parameter file",
-      "value-key": "[MYZIP]",
+      "value-key": "[ZIP_BASIS]",
       "list": false,
       "optional": false,
       "command-line-flag": ""
@@ -82,7 +82,7 @@
       "type": "String",
       "optional": true,
       "default-value": "1.9_2.1",
-      "description": "MUST be an interval in the format start_end   . frequency region in ppm on which phasing operations are focused.",
+      "description": "MUST be an interval in the format {start}_{end} . frequency region in ppm on which phasing operations are focused.",
       "command-line-flag": "--ppm_r",
       "value-key": "[PPM_R]"
     },
@@ -92,7 +92,7 @@
       "type": "String",
       "optional": true,
       "default-value": "1.9_2.1",
-      "description": "MUST be an interval in the format start_end   . frequency region in ppm on which SNR and LW analysis are performed (NAA peak).",
+      "description": "MUST be an interval in the format {start}_{end} . frequency region in ppm on which SNR and LW analysis are performed (NAA peak).",
       "command-line-flag": "--ppm_a",
       "value-key": "[PPM_A]"
     },
@@ -102,7 +102,7 @@
       "type": "String",
       "optional": true,
       "default-value": "5.5_6",
-      "description": "MUST be an interval in the format start_end   . frequency region in ppm on which noise level is estimated",
+      "description": "MUST be an interval in the format {start}_{end} . frequency region in ppm on which noise level is estimated",
       "command-line-flag": "--noise_r",
       "value-key": "[NOISE_R]"
     },
@@ -112,7 +112,7 @@
       "type": "String",
       "optional": true,
       "default-value": "0.5_5",
-      "description": "MUST be an interval in the format start_end   . frequency region in ppm used to display the spectra",
+      "description": "MUST be an interval in the format {start}_{end}  frequency region in ppm used to display the spectra",
       "command-line-flag": "--display_r",
       "value-key": "[DISPLAY_R]"
     },
