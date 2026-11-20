@@ -64,8 +64,7 @@
       "description": "Text file with extension '.control' setting up constraints, options and prior knowledge used in LCModel algorithm",
       "value-key": "[CTRL_FILE]",
       "list": false,
-      "optional": false,
-      "command-line-flag": ""
+      "optional": false
     },
     {
       "id": "zipped_folder",
@@ -74,8 +73,7 @@
       "description": "Archive containing all metabolite & macromolecules in .RAW format",
       "value-key": "[ZIP_BASIS]",
       "list": false,
-      "optional": false,
-      "command-line-flag": ""
+      "optional": false
     },
     {
       "id": "ppm_r",
