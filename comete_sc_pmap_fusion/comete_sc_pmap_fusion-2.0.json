@@ -7,7 +7,7 @@
   "schema-version": "0.5",
   "container-image":{
     "type": "singularity",
-    "image": "comete_sc_pmap_fusion:2.0"
+    "image": "registry.gitlab.inria.fr/shanoir-pipelines/shanoir_pipelines_private/comete_sc_pmap_fusion:2.0"
   },
   "inputs": [{
     "id": "pmap_archive",
